@@ -31,6 +31,7 @@
 		8C77BBB71BFFA310002F6645 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C77BBB61BFFA310002F6645 /* SystemConfiguration.framework */; };
 		8C77BBB91BFFA31C002F6645 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C77BBB81BFFA31C002F6645 /* libz.tbd */; };
 		8C77BBBB1BFFA325002F6645 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C77BBBA1BFFA325002F6645 /* libsqlite3.tbd */; };
+		DC260399E66A35F186E8A958 /* libPods-QueryMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B18B07BE6F94099A12550FA8 /* libPods-QueryMe.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		35B45C64662B547683952D02 /* Pods-QueryMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueryMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QueryMe/Pods-QueryMe.debug.xcconfig"; sourceTree = "<group>"; };
+		7AD4BBCB54BE7DF68A6D7501 /* Pods-QueryMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueryMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-QueryMe/Pods-QueryMe.release.xcconfig"; sourceTree = "<group>"; };
 		8C77BB651BFFA1AA002F6645 /* QueryMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QueryMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C77BB691BFFA1AA002F6645 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8C77BB6B1BFFA1AA002F6645 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -83,6 +86,7 @@
 		8C77BBB61BFFA310002F6645 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8C77BBB81BFFA31C002F6645 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8C77BBBA1BFFA325002F6645 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		B18B07BE6F94099A12550FA8 /* libPods-QueryMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QueryMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 				8C77BBA51BFFA28E002F6645 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				8C77BBA41BFFA28E002F6645 /* ParseFacebookUtils.framework in Frameworks */,
 				8C77BBA61BFFA28E002F6645 /* ParseTwitterUtils.framework in Frameworks */,
+				DC260399E66A35F186E8A958 /* libPods-QueryMe.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +131,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14788612CADBF03730CF0A6A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				35B45C64662B547683952D02 /* Pods-QueryMe.debug.xcconfig */,
+				7AD4BBCB54BE7DF68A6D7501 /* Pods-QueryMe.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8C77BB5C1BFFA1AA002F6645 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +148,7 @@
 				8C77BB811BFFA1AB002F6645 /* QueryMeTests */,
 				8C77BB8C1BFFA1AB002F6645 /* QueryMeUITests */,
 				8C77BB661BFFA1AA002F6645 /* Products */,
+				14788612CADBF03730CF0A6A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,6 +223,7 @@
 				8C77BBAC1BFFA2E9002F6645 /* CoreGraphics.framework */,
 				8C77BBAA1BFFA2C6002F6645 /* CFNetwork.framework */,
 				8C77BBA81BFFA2BE002F6645 /* AudioToolbox.framework */,
+				B18B07BE6F94099A12550FA8 /* libPods-QueryMe.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,9 +235,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C77BB921BFFA1AB002F6645 /* Build configuration list for PBXNativeTarget "QueryMe" */;
 			buildPhases = (
+				83C7A7104B42D3DB0B3259DE /* Check Pods Manifest.lock */,
 				8C77BB611BFFA1AA002F6645 /* Sources */,
 				8C77BB621BFFA1AA002F6645 /* Frameworks */,
 				8C77BB631BFFA1AA002F6645 /* Resources */,
+				314A02C0C96E9F1E292F97C3 /* Embed Pods Frameworks */,
+				EF419E5290A94A37D44C47B1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -336,6 +355,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		314A02C0C96E9F1E292F97C3 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QueryMe/Pods-QueryMe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83C7A7104B42D3DB0B3259DE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EF419E5290A94A37D44C47B1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QueryMe/Pods-QueryMe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8C77BB611BFFA1AA002F6645 /* Sources */ = {
@@ -483,6 +550,7 @@
 		};
 		8C77BB931BFFA1AB002F6645 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35B45C64662B547683952D02 /* Pods-QueryMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -498,6 +566,7 @@
 		};
 		8C77BB941BFFA1AB002F6645 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AD4BBCB54BE7DF68A6D7501 /* Pods-QueryMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -578,6 +647,7 @@
 				8C77BB941BFFA1AB002F6645 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C77BB951BFFA1AB002F6645 /* Build configuration list for PBXNativeTarget "QueryMeTests" */ = {
 			isa = XCConfigurationList;
@@ -586,6 +656,7 @@
 				8C77BB971BFFA1AB002F6645 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C77BB981BFFA1AB002F6645 /* Build configuration list for PBXNativeTarget "QueryMeUITests" */ = {
 			isa = XCConfigurationList;
@@ -594,6 +665,7 @@
 				8C77BB9A1BFFA1AB002F6645 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
