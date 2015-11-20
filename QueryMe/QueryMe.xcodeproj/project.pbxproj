@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C5DD9A01BFFAB4A00FE103F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5DD99D1BFFAB4A00FE103F /* FBSDKCoreKit.framework */; };
-		8C5DD9A11BFFAB4A00FE103F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5DD99E1BFFAB4A00FE103F /* FBSDKLoginKit.framework */; };
-		8C5DD9A21BFFAB4A00FE103F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5DD99F1BFFAB4A00FE103F /* FBSDKShareKit.framework */; };
+		8C3CFA1B1BFFCCDD00CF308E /* MWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CFA1A1BFFCCDD00CF308E /* MWLoginViewController.m */; };
+		8C3CFA1E1BFFD17F00CF308E /* MWSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CFA1D1BFFD17F00CF308E /* MWSignUpViewController.m */; };
 		8C5DD9A41BFFAE3000FE103F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5DD9A31BFFAE3000FE103F /* Social.framework */; };
 		8C5DD9A61BFFAE3A00FE103F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5DD9A51BFFAE3A00FE103F /* Accounts.framework */; };
 		8C77BB6A1BFFA1AA002F6645 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C77BB691BFFA1AA002F6645 /* main.m */; };
@@ -52,9 +51,10 @@
 /* Begin PBXFileReference section */
 		35B45C64662B547683952D02 /* Pods-QueryMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueryMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QueryMe/Pods-QueryMe.debug.xcconfig"; sourceTree = "<group>"; };
 		7AD4BBCB54BE7DF68A6D7501 /* Pods-QueryMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueryMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-QueryMe/Pods-QueryMe.release.xcconfig"; sourceTree = "<group>"; };
-		8C5DD99D1BFFAB4A00FE103F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		8C5DD99E1BFFAB4A00FE103F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		8C5DD99F1BFFAB4A00FE103F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		8C3CFA191BFFCCDD00CF308E /* MWLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWLoginViewController.h; sourceTree = "<group>"; };
+		8C3CFA1A1BFFCCDD00CF308E /* MWLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWLoginViewController.m; sourceTree = "<group>"; };
+		8C3CFA1C1BFFD17F00CF308E /* MWSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSignUpViewController.h; sourceTree = "<group>"; };
+		8C3CFA1D1BFFD17F00CF308E /* MWSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWSignUpViewController.m; sourceTree = "<group>"; };
 		8C5DD9A31BFFAE3000FE103F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8C5DD9A51BFFAE3A00FE103F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8C77BB651BFFA1AA002F6645 /* QueryMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QueryMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,12 +98,9 @@
 				8C77BBB31BFFA300002F6645 /* Security.framework in Frameworks */,
 				8C77BBB11BFFA2F7002F6645 /* QuartzCore.framework in Frameworks */,
 				8C77BBAF1BFFA2EF002F6645 /* CoreLocation.framework in Frameworks */,
-				8C5DD9A01BFFAB4A00FE103F /* FBSDKCoreKit.framework in Frameworks */,
 				8C77BBAD1BFFA2E9002F6645 /* CoreGraphics.framework in Frameworks */,
 				8C77BBAB1BFFA2C6002F6645 /* CFNetwork.framework in Frameworks */,
 				8C77BBA91BFFA2BE002F6645 /* AudioToolbox.framework in Frameworks */,
-				8C5DD9A21BFFAB4A00FE103F /* FBSDKShareKit.framework in Frameworks */,
-				8C5DD9A11BFFAB4A00FE103F /* FBSDKLoginKit.framework in Frameworks */,
 				DC260399E66A35F186E8A958 /* libPods-QueryMe.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +131,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8C3CFA151BFFB2B800CF308E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8C3CFA191BFFCCDD00CF308E /* MWLoginViewController.h */,
+				8C3CFA1A1BFFCCDD00CF308E /* MWLoginViewController.m */,
+				8C3CFA1C1BFFD17F00CF308E /* MWSignUpViewController.h */,
+				8C3CFA1D1BFFD17F00CF308E /* MWSignUpViewController.m */,
+				8C77BB6E1BFFA1AA002F6645 /* ViewController.h */,
+				8C77BB6F1BFFA1AA002F6645 /* ViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		8C77BB5C1BFFA1AA002F6645 = {
 			isa = PBXGroup;
 			children = (
@@ -161,8 +171,7 @@
 			children = (
 				8C77BB6B1BFFA1AA002F6645 /* AppDelegate.h */,
 				8C77BB6C1BFFA1AA002F6645 /* AppDelegate.m */,
-				8C77BB6E1BFFA1AA002F6645 /* ViewController.h */,
-				8C77BB6F1BFFA1AA002F6645 /* ViewController.m */,
+				8C3CFA151BFFB2B800CF308E /* Controllers */,
 				8C77BB711BFFA1AB002F6645 /* Main.storyboard */,
 				8C77BB741BFFA1AB002F6645 /* Assets.xcassets */,
 				8C77BB761BFFA1AB002F6645 /* LaunchScreen.storyboard */,
@@ -203,9 +212,6 @@
 			children = (
 				8C5DD9A51BFFAE3A00FE103F /* Accounts.framework */,
 				8C5DD9A31BFFAE3000FE103F /* Social.framework */,
-				8C5DD99D1BFFAB4A00FE103F /* FBSDKCoreKit.framework */,
-				8C5DD99E1BFFAB4A00FE103F /* FBSDKLoginKit.framework */,
-				8C5DD99F1BFFAB4A00FE103F /* FBSDKShareKit.framework */,
 				8C77BBBA1BFFA325002F6645 /* libsqlite3.tbd */,
 				8C77BBB81BFFA31C002F6645 /* libz.tbd */,
 				8C77BBB61BFFA310002F6645 /* SystemConfiguration.framework */,
@@ -408,7 +414,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C77BB701BFFA1AA002F6645 /* ViewController.m in Sources */,
+				8C3CFA1E1BFFD17F00CF308E /* MWSignUpViewController.m in Sources */,
 				8C77BB6D1BFFA1AA002F6645 /* AppDelegate.m in Sources */,
+				8C3CFA1B1BFFCCDD00CF308E /* MWLoginViewController.m in Sources */,
 				8C77BB6A1BFFA1AA002F6645 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

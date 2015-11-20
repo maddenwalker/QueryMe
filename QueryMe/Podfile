@@ -6,6 +6,7 @@
 target 'QueryMe' do
   pod 'Parse'
   pod 'ParseUI'
+  pod 'ParseFacebookUtilsV4'
 
 end
 
