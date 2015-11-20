@@ -4,7 +4,7 @@
 # use_frameworks!
 
 target 'QueryMe' do
-
+  pod 'Parse'
   pod 'ParseUI'
 
 end
