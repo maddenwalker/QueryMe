@@ -30,8 +30,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (![PFUser currentUser] ||
-        ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+    if (![PFUser currentUser]) {
         
         //login view controller
         MWLoginViewController *loginViewController = [[MWLoginViewController alloc] init];
@@ -48,6 +47,7 @@
         [self presentViewController:loginViewController animated:YES completion:NULL];
         
     }
+    
 }
 - (IBAction)userDidPressLogout {
     [PFUser logOut];
