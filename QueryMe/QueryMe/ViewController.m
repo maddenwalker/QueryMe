@@ -49,6 +49,9 @@
         
     }
 }
+- (IBAction)userDidPressLogout {
+    [PFUser logOut];
+}
 
 //MARK: PFLoginViewControllerDelegate Methods
 
@@ -64,7 +67,7 @@
     
 }
 
-- (void)logInViewController:(MWLoginViewController *)logInController didLogInUser:(PFUser *)user {
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
