@@ -25,17 +25,31 @@
                                     <action selector="userDidPressLogout" destination="BYZ-38-t0r" eventType="touchUpInside" id="aUn-9c-hBf"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mKd-gD-cq4" customClass="PFImageView">
+                                <rect key="frame" x="250" y="177" width="100" height="100"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="h15-S1-3V2"/>
+                                    <constraint firstAttribute="height" constant="100" id="szZ-yl-F4q"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="cPw-lm-xfL" firstAttribute="top" secondItem="mKd-gD-cq4" secondAttribute="bottom" constant="8" id="Hog-am-hGE"/>
                             <constraint firstItem="cPw-lm-xfL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Jqn-cd-2oP"/>
                             <constraint firstItem="cPw-lm-xfL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cV2-1I-6on"/>
+                            <constraint firstItem="mKd-gD-cq4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iLF-dB-fm7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="profilePictureImageView" destination="mKd-gD-cq4" id="LVb-6P-HDb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="455" y="212"/>
         </scene>
     </scenes>
 </document>

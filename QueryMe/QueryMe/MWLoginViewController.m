@@ -7,7 +7,11 @@
 //
 
 #import "MWLoginViewController.h"
+#import "MWUser.h"
+#import <FBSDKCoreKit/FBSDKGraphRequest.h>
 #import <PFFacebookUtils.h>
+#import <FBSDKCoreKit.h>
+#import <AFNetworking.h>
 
 @interface MWLoginViewController ()
 
@@ -42,6 +46,7 @@
             NSLog(@"Uh oh. The user cancelled the Facebook login.");
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in through Facebook!");
+            [self loadFacebookData];
         } else {
             NSLog(@"User logged in through Facebook!");
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -52,6 +57,35 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) loadFacebookData {
+
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, first_name, picture.type(large)"} HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error == nil) {
+            NSDictionary *userInfo = result;
+            NSString *firstName = userInfo[@"first_name"];
+            NSString *facebookID = userInfo[@"id"];
+            
+            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+            
+            
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURLSessionDataTask *dataTask = [session dataTaskWithURL:pictureURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                if (error == nil) {
+                    PFFile *picture = [PFFile fileWithData:data];
+                    [[MWUser currentUser] setObject:picture forKey:@"profilePicture"];
+                    [[MWUser currentUser] saveInBackground];
+                }
+            }];
+            [dataTask resume];
+            
+            [[MWUser currentUser] setObject:firstName forKey:@"firstName"];
+            [[MWUser currentUser] setObject:facebookID forKey:@"facebookID"];
+            [[MWUser currentUser] saveInBackground];
+        }
+    }];
 }
 
 /*

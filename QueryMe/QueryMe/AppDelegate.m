@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MWUser.h"
 #import <Parse/Parse.h>
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit.h>
@@ -21,6 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [MWUser registerSubclass];
     [Parse enableLocalDatastore];
     
     [Parse setApplicationId:@"wozIQGzNcZ595wBqOvsdLbqXafhnIpiyHtyBJygJ"

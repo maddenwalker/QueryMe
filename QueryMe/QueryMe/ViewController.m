@@ -9,12 +9,14 @@
 #import "ViewController.h"
 #import "MWLoginViewController.h"
 #import "MWSignUpViewController.h"
+#import "MWUser.h"
 #import <Parse/Parse.h>
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface ViewController() <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@property (weak, nonatomic) IBOutlet PFImageView *profilePictureImageView;
 
 @end
 
@@ -24,13 +26,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    [self showProfilePicture];
+    
 }
 
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (![PFUser currentUser]) {
+    if (![MWUser currentUser]) {
         
         //login view controller
         MWLoginViewController *loginViewController = [[MWLoginViewController alloc] init];
@@ -121,6 +125,15 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}]];
     
     [viewController presentViewController:alert animated:YES completion:nil];
+}
+
+- (void) showProfilePicture {
+    [[MWUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (error == nil) {
+            self.profilePictureImageView.file = [[MWUser currentUser] objectForKey:@"profilePicture"];
+            [self.profilePictureImageView loadInBackground];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
