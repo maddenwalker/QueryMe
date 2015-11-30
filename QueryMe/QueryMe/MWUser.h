@@ -11,7 +11,9 @@
 @interface MWUser : PFUser <PFSubclassing>
 
 @property (strong, nonatomic) NSString *firstName;
+@property (assign, nonatomic) BOOL firstNameExists;
 @property (strong, nonatomic) PFFile *profilePicture;
+@property (assign, nonatomic) BOOL profilePictureExists;
 @property (strong, nonatomic) NSString *profileDescription;
 
 @end

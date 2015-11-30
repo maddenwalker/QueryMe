@@ -60,6 +60,8 @@
 }
 
 - (void) loadFacebookData {
+    
+    PFUser *currentUser = [MWUser currentUser];
 
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, first_name, picture.type(large)"} HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
@@ -75,15 +77,16 @@
             NSURLSessionDataTask *dataTask = [session dataTaskWithURL:pictureURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                 if (error == nil) {
                     PFFile *picture = [PFFile fileWithData:data];
-                    [[MWUser currentUser] setObject:picture forKey:@"profilePicture"];
-                    [[MWUser currentUser] saveInBackground];
+                    currentUser[@"profilePicture"] = picture;
+                    [currentUser saveInBackground];
+                    currentUser[@"profilePictureExists"] = @(YES);
                 }
             }];
             [dataTask resume];
             
-            [[MWUser currentUser] setObject:firstName forKey:@"firstName"];
-            [[MWUser currentUser] setObject:facebookID forKey:@"facebookID"];
-            [[MWUser currentUser] saveInBackground];
+            currentUser[@"firstName"] = firstName;
+            currentUser[@"facebookID"] = facebookID;
+            [currentUser saveInBackground];
         }
     }];
 }

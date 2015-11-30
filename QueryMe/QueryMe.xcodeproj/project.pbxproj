@@ -10,6 +10,8 @@
 		8C1570CF1C03DBBC00D99382 /* MWUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1570CE1C03DBBC00D99382 /* MWUser.m */; };
 		8C3CFA1B1BFFCCDD00CF308E /* MWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CFA1A1BFFCCDD00CF308E /* MWLoginViewController.m */; };
 		8C3CFA1E1BFFD17F00CF308E /* MWSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CFA1D1BFFD17F00CF308E /* MWSignUpViewController.m */; };
+		8C4197151C0CD0B800016BA0 /* MainQuestionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4197141C0CD0B800016BA0 /* MainQuestionTableViewController.m */; };
+		8C4197181C0CF7A600016BA0 /* MWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4197171C0CF7A600016BA0 /* MWTableViewCell.m */; };
 		8C5DD9A41BFFAE3000FE103F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5DD9A31BFFAE3000FE103F /* Social.framework */; };
 		8C5DD9A61BFFAE3A00FE103F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5DD9A51BFFAE3A00FE103F /* Accounts.framework */; };
 		8C77BB6A1BFFA1AA002F6645 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C77BB691BFFA1AA002F6645 /* main.m */; };
@@ -58,6 +60,10 @@
 		8C3CFA1A1BFFCCDD00CF308E /* MWLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWLoginViewController.m; sourceTree = "<group>"; };
 		8C3CFA1C1BFFD17F00CF308E /* MWSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSignUpViewController.h; sourceTree = "<group>"; };
 		8C3CFA1D1BFFD17F00CF308E /* MWSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWSignUpViewController.m; sourceTree = "<group>"; };
+		8C4197131C0CD0B800016BA0 /* MainQuestionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainQuestionTableViewController.h; sourceTree = "<group>"; };
+		8C4197141C0CD0B800016BA0 /* MainQuestionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainQuestionTableViewController.m; sourceTree = "<group>"; };
+		8C4197161C0CF7A600016BA0 /* MWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTableViewCell.h; sourceTree = "<group>"; };
+		8C4197171C0CF7A600016BA0 /* MWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWTableViewCell.m; sourceTree = "<group>"; };
 		8C5DD9A31BFFAE3000FE103F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8C5DD9A51BFFAE3A00FE103F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8C77BB651BFFA1AA002F6645 /* QueryMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QueryMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,9 +159,20 @@
 				8C3CFA1C1BFFD17F00CF308E /* MWSignUpViewController.h */,
 				8C3CFA1D1BFFD17F00CF308E /* MWSignUpViewController.m */,
 				8C77BB6E1BFFA1AA002F6645 /* ViewController.h */,
+				8C4197131C0CD0B800016BA0 /* MainQuestionTableViewController.h */,
+				8C4197141C0CD0B800016BA0 /* MainQuestionTableViewController.m */,
 				8C77BB6F1BFFA1AA002F6645 /* ViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8C4197191C0CF7AA00016BA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C4197161C0CF7A600016BA0 /* MWTableViewCell.h */,
+				8C4197171C0CF7A600016BA0 /* MWTableViewCell.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		8C77BB5C1BFFA1AA002F6645 = {
@@ -184,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				8C1570C91C03DA5500D99382 /* Model */,
+				8C4197191C0CF7AA00016BA0 /* View */,
 				8C3CFA151BFFB2B800CF308E /* Controllers */,
 				8C77BB711BFFA1AB002F6645 /* Main.storyboard */,
 				8C77BB741BFFA1AB002F6645 /* Assets.xcassets */,
@@ -429,8 +447,10 @@
 				8C77BB701BFFA1AA002F6645 /* ViewController.m in Sources */,
 				8C3CFA1E1BFFD17F00CF308E /* MWSignUpViewController.m in Sources */,
 				8C77BB6D1BFFA1AA002F6645 /* AppDelegate.m in Sources */,
+				8C4197181C0CF7A600016BA0 /* MWTableViewCell.m in Sources */,
 				8C3CFA1B1BFFCCDD00CF308E /* MWLoginViewController.m in Sources */,
 				8C1570CF1C03DBBC00D99382 /* MWUser.m in Sources */,
+				8C4197151C0CD0B800016BA0 /* MainQuestionTableViewController.m in Sources */,
 				8C77BB6A1BFFA1AA002F6645 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
