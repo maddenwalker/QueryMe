@@ -11,8 +11,9 @@
 
 @interface MWTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) PFImageView *profilePicture;
-@property (strong, nonatomic) NSString *questionText;
-@property (strong, nonatomic) 
+@property (strong, nonatomic) IBOutlet PFImageView *profilePicture;
+@property (strong, nonatomic) IBOutlet UILabel *questionText;
+@property (strong, nonatomic) IBOutlet UILabel *answerCountText;
+@property (strong, nonatomic) IBOutlet UILabel *questionInterestIndicator;
 
 @end
