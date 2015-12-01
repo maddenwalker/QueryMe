@@ -19,6 +19,8 @@
 
 @implementation MWLoginViewController
 
+@synthesize delegate;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -49,7 +51,9 @@
             [self loadFacebookData];
         } else {
             NSLog(@"User logged in through Facebook!");
-            [self dismissViewControllerAnimated:YES completion:nil];
+            if ([self.delegate respondsToSelector:@selector(logInViewController:didLogInUserWithFacebook:)]) {
+                [self.delegate logInViewController:self didLogInUserWithFacebook:user];
+            }
         }
     }];
 }

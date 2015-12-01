@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Query Me-->
+        <!--All Questions-->
         <scene sceneID="uqG-S6-7bI">
             <objects>
                 <tableViewController id="fYy-GY-6L0" customClass="MainQuestionTableViewController" sceneMemberID="viewController">
@@ -23,13 +23,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Question Text Goes Here . . ." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="ZTD-mt-dJo">
-                                            <rect key="frame" x="8" y="8" width="526" height="17"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k43-3C-7cZ" customClass="PFImageView">
                                             <rect key="frame" x="542" y="8" width="50" height="50"/>
                                             <animations/>
@@ -38,33 +31,44 @@
                                                 <constraint firstAttribute="width" constant="50" id="b35-ao-wdc"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="999 answers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="75" translatesAutoresizingMaskIntoConstraints="NO" id="FuS-0G-YPu">
-                                            <rect key="frame" x="8" y="33" width="75" height="28"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999 answers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="75" translatesAutoresizingMaskIntoConstraints="NO" id="FuS-0G-YPu">
+                                            <rect key="frame" x="8" y="33" width="100" height="28"/>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="DUR-ff-yfM"/>
+                                                <constraint firstAttribute="height" constant="28" id="V4K-gY-1om"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.2196078431372549" green="0.6470588235294118" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚡️⚡️⚡️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuj-hG-PUD">
-                                            <rect key="frame" x="89" y="40" width="48" height="14.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="⚡️⚡️⚡️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuj-hG-PUD">
+                                            <rect key="frame" x="116" y="41" width="48" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Question Text Goes Here . . ." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="ZTD-mt-dJo">
+                                            <rect key="frame" x="8" y="8" width="526" height="17"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstAttribute="leadingMargin" secondItem="ZTD-mt-dJo" secondAttribute="leading" id="39h-iN-lpc"/>
                                         <constraint firstAttribute="topMargin" secondItem="k43-3C-7cZ" secondAttribute="top" id="47k-0T-DuK"/>
-                                        <constraint firstAttribute="topMargin" secondItem="ZTD-mt-dJo" secondAttribute="top" id="Lq3-fS-4DG"/>
+                                        <constraint firstItem="k43-3C-7cZ" firstAttribute="leading" secondItem="ZTD-mt-dJo" secondAttribute="trailing" constant="8" id="5zS-zh-eeI"/>
                                         <constraint firstItem="vuj-hG-PUD" firstAttribute="centerY" secondItem="FuS-0G-YPu" secondAttribute="centerY" id="NTC-3e-CZY"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="FuS-0G-YPu" secondAttribute="leading" id="PXN-Mu-4fK"/>
-                                        <constraint firstItem="FuS-0G-YPu" firstAttribute="top" secondItem="ZTD-mt-dJo" secondAttribute="bottom" constant="8" id="SJU-4R-tKN"/>
-                                        <constraint firstItem="k43-3C-7cZ" firstAttribute="leading" secondItem="ZTD-mt-dJo" secondAttribute="trailing" constant="8" id="U2U-wW-Opg"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="ZTD-mt-dJo" secondAttribute="leading" id="R2Z-Yl-ISE"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="k43-3C-7cZ" secondAttribute="trailing" id="ZgM-25-xxe"/>
+                                        <constraint firstItem="FuS-0G-YPu" firstAttribute="top" secondItem="ZTD-mt-dJo" secondAttribute="bottom" constant="8" id="a7G-e9-arT"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="FuS-0G-YPu" secondAttribute="bottom" constant="20" id="hSA-jy-agu"/>
                                         <constraint firstItem="vuj-hG-PUD" firstAttribute="leading" secondItem="FuS-0G-YPu" secondAttribute="trailing" constant="8" id="oqw-ZB-LX5"/>
+                                        <constraint firstAttribute="topMargin" secondItem="ZTD-mt-dJo" secondAttribute="top" id="poH-sy-ABu"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
@@ -73,6 +77,7 @@
                                     <outlet property="profilePicture" destination="k43-3C-7cZ" id="LRj-SC-CmL"/>
                                     <outlet property="questionInterestIndicator" destination="vuj-hG-PUD" id="bgd-4P-5EY"/>
                                     <outlet property="questionText" destination="ZTD-mt-dJo" id="ivT-Gk-XDh"/>
+                                    <segue destination="Ng5-eL-hj9" kind="show" identifier="questionDetailSegue" id="rA8-Yn-anY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -81,11 +86,71 @@
                             <outlet property="delegate" destination="fYy-GY-6L0" id="zCe-72-RbR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Query Me" id="dsL-gQ-oOd"/>
+                    <navigationItem key="navigationItem" title="All Questions" id="dsL-gQ-oOd">
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Logout" id="TVA-mm-aeZ">
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="fYy-GY-6L0" id="ZZI-6F-d0X"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="qhg-Hp-JDh">
+                            <connections>
+                                <action selector="composeButtonPressed:" destination="fYy-GY-6L0" id="T26-yp-pbF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="logoutButton" destination="TVA-mm-aeZ" id="qSR-2K-rl4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdB-XX-5JT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1651" y="209"/>
+        </scene>
+        <!--Question Detail View Controller-->
+        <scene sceneID="6IR-lW-WOf">
+            <objects>
+                <viewController id="Ng5-eL-hj9" customClass="QuestionDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="P4e-If-Mo3"/>
+                        <viewControllerLayoutGuide type="bottom" id="HGJ-i5-Gpl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Q3w-sw-iGg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;User&gt; Asked:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqC-sR-hlx">
+                                <rect key="frame" x="20" y="72" width="560" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Question Text Goes Here . . ." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-KW-ZPS">
+                                <rect key="frame" x="20" y="101" width="560" height="17"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="sEX-KW-ZPS" secondAttribute="leading" id="am5-hT-ZEQ"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="wqC-sR-hlx" secondAttribute="leading" id="i8n-za-Yb4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wqC-sR-hlx" secondAttribute="trailing" id="iXk-Uc-cNN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sEX-KW-ZPS" secondAttribute="trailing" id="l5B-il-TDQ"/>
+                            <constraint firstItem="wqC-sR-hlx" firstAttribute="top" secondItem="P4e-If-Mo3" secondAttribute="bottom" constant="8" id="ptW-GB-fBR"/>
+                            <constraint firstItem="sEX-KW-ZPS" firstAttribute="top" secondItem="wqC-sR-hlx" secondAttribute="bottom" constant="8" id="uKF-rw-8ud"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="questionTextLabel" destination="sEX-KW-ZPS" id="7GB-S8-kgu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KSv-uM-DI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2334" y="209"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="swK-w3-R77">
