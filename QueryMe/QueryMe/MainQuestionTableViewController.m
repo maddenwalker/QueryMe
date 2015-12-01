@@ -21,6 +21,7 @@ static NSString * const simpleTableIdentifier = @"QuestionCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self refreshObjects];
 
 }
 
@@ -45,10 +46,33 @@ static NSString * const simpleTableIdentifier = @"QuestionCell";
 }
 
 //Setup Query for TableViewCell
-- (PFQuery *)queryForTable {
+- (PFQuery *)baseQuery {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query includeKey:@"asker"];
     return query;
+}
+
+
+- (PFQuery *)queryForTable {
+    return [[self baseQuery] fromLocalDatastore];
+}
+
+- (void) refreshObjects {
+    [[[self baseQuery] findObjectsInBackground] continueWithBlock:^id _Nullable(BFTask * _Nonnull task) {
+        if (task.error) {
+            [self.refreshControl endRefreshing];
+            return nil;
+        }
+        
+        return [[PFObject unpinAllObjectsInBackgroundWithName:@"cacheLabel"] continueWithSuccessBlock:^id _Nullable(BFTask<NSNumber *> * _Nonnull unused) {
+            NSArray *objects = task.result;
+            return [[PFObject pinAllInBackground:objects withName:@"cacheLabel"] continueWithSuccessBlock:^id _Nullable(BFTask<NSNumber *> * _Nonnull unused) {
+                [self.refreshControl endRefreshing];
+                [self loadObjects];
+                return nil;
+            }];
+        }];
+    }];
 }
 
 //MARK: TableViewDelegate - Set TableViewHeight and Number of Sections
@@ -112,15 +136,15 @@ static NSString * const simpleTableIdentifier = @"QuestionCell";
     cell.profilePicture.image = [UIImage imageNamed:@"emptyProfilePicture"];
     
     //try to fetch user profile photo in background
+
     MWUser *user = [object objectForKey:@"asker"];
-    
+
     if ([user[@"profilePictureExists"] boolValue]) {
         PFFile *profilePicture = user[@"profilePicture"];
         cell.profilePicture.file = profilePicture;
         [cell.profilePicture loadInBackground];
     }
-    
-    
+    q
     //Setup the array of number of answers for the question
     NSArray *arrayOfAnswers = [object objectForKey:@"answersToQuestion"];
     NSUInteger activityOfAnswers = arrayOfAnswers.count;
