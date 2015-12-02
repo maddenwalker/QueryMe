@@ -11,9 +11,9 @@
 
 @interface MWTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet PFImageView *profilePicture;
-@property (strong, nonatomic) IBOutlet UILabel *questionText;
-@property (strong, nonatomic) IBOutlet UILabel *answerCountText;
-@property (strong, nonatomic) IBOutlet UILabel *questionInterestIndicator;
+@property (strong, nonatomic) UILabel *questionText;
+
+- (void) configureCell:(MWTableViewCell *)cell withObject:(PFObject *)object;
++ (CGFloat)heightForBasicCellWithObject:(PFObject *)object andWidth:(CGFloat)width;
 
 @end

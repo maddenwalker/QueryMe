@@ -18,6 +18,7 @@
 #import <Parse.h>
 
 static NSString * const simpleTableIdentifier = @"QuestionCell";
+static NSString * const customCellIdentifier = @"CustomQuestionCell";
 
 @interface MainQuestionTableViewController () <MWLoginVewControllerDelegate, PFSignUpViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
@@ -56,6 +57,7 @@ static NSString * const simpleTableIdentifier = @"QuestionCell";
         
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = NO;
+        
 
     }
     return self;
@@ -149,7 +151,11 @@ static NSString * const simpleTableIdentifier = @"QuestionCell";
     return informationComplete;
 }
 
--(void)signUpViewController:(MWSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+-(void)signUpViewController:(MWSignUpViewController *)signUpController didSignUpUser:(MWUser *)user {
+    user.profilePictureExists = NO;
+    user.firstNameExists = NO;
+    [user saveInBackground];
+    NSLog(@"User signed up successfully");
     [self toggleUserSignedIn];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -199,103 +205,26 @@ static NSString * const simpleTableIdentifier = @"QuestionCell";
     return self.objects.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 200;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self heightForBasicCellAtIndexPath:indexPath];
-}
-
-- (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
-    static MWTableViewCell *sizingCell = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    });
-    
-    PFObject *objectForSizingCell = [self.objects objectAtIndex:indexPath.row];
-    
-    [self configureCell:sizingCell atIndexPath:indexPath withObject:objectForSizingCell];
-    return [self calculateHeightForConfiguredSizingCell:sizingCell];
-}
-
-- (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
-    [sizingCell setNeedsLayout];
-    [sizingCell layoutIfNeeded];
-    
-    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    
-    if (size.height < 90) {
-        return 90 + 1.0f;
-    }
-    
-    return size.height + 1.0f;
+    return [MWTableViewCell heightForBasicCellWithObject:[self.objects objectAtIndex:indexPath.row] andWidth:CGRectGetWidth(self.view.bounds)];
 }
 
 //MARK: TableViewDelegate - Set the Content of the Cells
 - (MWTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     
-    MWTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    MWTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:customCellIdentifier];
     
     if (cell == nil) {
-        cell = [[MWTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[MWTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:customCellIdentifier];
     }
     
-    [self configureCell:cell atIndexPath:indexPath withObject:object];
+    [cell configureCell:cell withObject:object];
     
     return cell;
-}
-
-- (void) configureCell:(MWTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath withObject:(PFObject *)object {
-    //Setup the question label
-
-    cell.questionText.text = [object objectForKey:@"questionText"];
-    
-    //Setup the user label who asked the question
-    cell.profilePicture.layer.cornerRadius = 25;
-    cell.profilePicture.layer.masksToBounds = YES;
-    
-    cell.profilePicture.image = [UIImage imageNamed:@"emptyProfilePicture"];
-    
-    //try to fetch user profile photo in background
-
-    MWUser *user = [object objectForKey:@"asker"];
-
-    if ([user[@"profilePictureExists"] boolValue]) {
-        PFFile *profilePicture = user[@"profilePicture"];
-        cell.profilePicture.file = profilePicture;
-        [cell.profilePicture loadInBackground];
-    }
-    
-    //Setup the array of number of answers for the question
-    NSArray *arrayOfAnswers = [object objectForKey:@"answersToQuestion"];
-    NSUInteger activityOfAnswers = arrayOfAnswers.count;
-    NSString *plural = @"s";
-    
-    if (activityOfAnswers == 1) {
-        plural = @"";
-    }
-    
-    cell.answerCountText.text = [NSString stringWithFormat:@"%lu Answer%@", (unsigned long)activityOfAnswers, plural];
-    
-    //Format the cell with answers count
-    cell.answerCountText.layer.borderColor = [UIColor colorWithRed:56.0 / 255.0 green:165.0 / 255.0 blue:219.0 / 255.0 alpha:1.0].CGColor;
-    cell.answerCountText.layer.borderWidth = 2.0;
-    cell.answerCountText.layer.cornerRadius = 8.0;
-    
-    switch (activityOfAnswers) {
-        case 1:
-            cell.questionInterestIndicator.text = @"⚡️";
-            break;
-        case 2 ... 10:
-            cell.questionInterestIndicator.text = @"⚡️⚡️";
-            break;
-        case 11 ... 1000000:
-            cell.questionInterestIndicator.text = @"⚡️⚡️⚡️";
-            break;
-            
-        default:
-            cell.questionInterestIndicator.text = @"";
-            break;
-    }
-
 }
 
 //MARK: Navigation
