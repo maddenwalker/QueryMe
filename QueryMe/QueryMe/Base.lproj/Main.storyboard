@@ -29,16 +29,71 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="qhg-Hp-JDh">
                             <connections>
                                 <action selector="composeButtonPressed:" destination="fYy-GY-6L0" id="T26-yp-pbF"/>
+                                <segue destination="fHS-Un-cwH" kind="presentation" id="tjI-en-FLF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="logoutButton" destination="TVA-mm-aeZ" id="qSR-2K-rl4"/>
+                        <segue destination="Ng5-eL-hj9" kind="show" identifier="questionDetailSegue" id="73u-HI-1u3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdB-XX-5JT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1651" y="209"/>
+        </scene>
+        <!--Add Question View Controller-->
+        <scene sceneID="AV2-R9-UiY">
+            <objects>
+                <viewController id="fHS-Un-cwH" customClass="AddQuestionViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IyZ-Zn-ZZd"/>
+                        <viewControllerLayoutGuide type="bottom" id="6ov-KI-fcK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AR2-He-zjg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFy-6C-hev">
+                                <rect key="frame" x="20" y="20" width="44" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Q9G-lf-jCv"/>
+                                    <constraint firstAttribute="width" constant="44" id="gTj-D2-cox"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="29"/>
+                                <state key="normal" title="x">
+                                    <color key="titleColor" red="0.32584697010000002" green="0.32583722469999998" blue="0.32584273819999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissButtonPressed:" destination="fHS-Un-cwH" eventType="touchUpInside" id="ZkN-tK-QwI"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X6H-OK-aM2" customClass="MWProfileImageView">
+                                <rect key="frame" x="52" y="72" width="50" height="50"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ifW-q2-mNn"/>
+                                    <constraint firstAttribute="width" constant="50" id="jUe-CZ-rN8"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LFy-6C-hev" firstAttribute="top" secondItem="IyZ-Zn-ZZd" secondAttribute="bottom" id="Cvs-Ja-FlC"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="LFy-6C-hev" secondAttribute="leading" id="NHz-p3-GYZ"/>
+                            <constraint firstItem="X6H-OK-aM2" firstAttribute="leading" secondItem="AR2-He-zjg" secondAttribute="leadingMargin" constant="32" id="b4w-oU-nEb"/>
+                            <constraint firstItem="X6H-OK-aM2" firstAttribute="top" secondItem="LFy-6C-hev" secondAttribute="bottom" constant="8" id="sPe-Pn-7le"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="profilePictureImageView" destination="X6H-OK-aM2" id="bmt-fL-bhH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3n7-2j-IUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2332" y="-122"/>
         </scene>
         <!--Question Detail View Controller-->
         <scene sceneID="6IR-lW-WOf">
@@ -56,7 +111,7 @@
                                 <rect key="frame" x="20" y="72" width="560" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Question Text Goes Here . . ." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-KW-ZPS">
@@ -84,7 +139,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSv-uM-DI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2334" y="209"/>
+            <point key="canvasLocation" x="2332" y="589"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="swK-w3-R77">

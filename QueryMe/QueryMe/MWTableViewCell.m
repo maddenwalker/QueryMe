@@ -8,11 +8,12 @@
 
 #import "MWTableViewCell.h"
 #import "MWUser.h"
+#import "MWProfileImageView.h"
 #import <Parse/Parse.h>
 
 @interface MWTableViewCell()
 
-@property (strong, nonatomic) PFImageView *profilePicture;
+@property (strong, nonatomic) MWProfileImageView *profilePicture;
 @property (strong, nonatomic) UILabel *answerCountText;
 @property (strong, nonatomic) UILabel *questionInterestIndicator;
 @property (strong, nonatomic) NSLayoutConstraint *profilePictureAspectRatioConstraint;
@@ -30,15 +31,11 @@ static UIColor *answerCountColor;
     
     if (self) {
         //Instantiate all of the cell elements
-        self.profilePicture = [[PFImageView alloc] initWithImage:[UIImage imageNamed:@"emptyProfilePicture"]];
+        self.profilePicture = [[MWProfileImageView alloc] init];
         self.answerCountText = [[UILabel alloc] init];
         self.questionText = [[UILabel alloc] init];
         self.questionInterestIndicator = [[UILabel alloc] init];
         
-        //format cell with profile picture defaults
-        self.profilePicture.frame = CGRectMake(0, 0, 50, 50);
-        self.profilePicture.layer.cornerRadius = 25;
-        self.profilePicture.layer.masksToBounds = YES;
         
         //Format the cell with answers count
         self.answerCountText.font = lightFont;
@@ -121,11 +118,7 @@ static UIColor *answerCountColor;
     
     MWUser *user = [object objectForKey:@"asker"];
     
-    if ([user[@"profilePictureExists"] boolValue]) {
-        PFFile *profilePicture = user[@"profilePicture"];
-        self.profilePicture.file = profilePicture;
-        [self.profilePicture loadInBackground];
-    }
+    [self.profilePicture setProfilePictureToUser:user];
     
     //Setup the array of number of answers for the question
     NSArray *arrayOfAnswers = [object objectForKey:@"answersToQuestion"];

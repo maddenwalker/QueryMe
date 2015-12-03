@@ -31,6 +31,8 @@
 		8C77BBB71BFFA310002F6645 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C77BBB61BFFA310002F6645 /* SystemConfiguration.framework */; };
 		8C77BBB91BFFA31C002F6645 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C77BBB81BFFA31C002F6645 /* libz.tbd */; };
 		8C77BBBB1BFFA325002F6645 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C77BBBA1BFFA325002F6645 /* libsqlite3.tbd */; };
+		8C7E001F1C10B17A0022856C /* MWProfileImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E001E1C10B17A0022856C /* MWProfileImageView.m */; };
+		8C98CFA51C10ACEE00B43A26 /* AddQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C98CFA41C10ACEE00B43A26 /* AddQuestionViewController.m */; };
 		DC260399E66A35F186E8A958 /* libPods-QueryMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B18B07BE6F94099A12550FA8 /* libPods-QueryMe.a */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +93,10 @@
 		8C77BBB61BFFA310002F6645 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8C77BBB81BFFA31C002F6645 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8C77BBBA1BFFA325002F6645 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8C7E001D1C10B17A0022856C /* MWProfileImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWProfileImageView.h; sourceTree = "<group>"; };
+		8C7E001E1C10B17A0022856C /* MWProfileImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWProfileImageView.m; sourceTree = "<group>"; };
+		8C98CFA31C10ACEE00B43A26 /* AddQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddQuestionViewController.h; sourceTree = "<group>"; };
+		8C98CFA41C10ACEE00B43A26 /* AddQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddQuestionViewController.m; sourceTree = "<group>"; };
 		B18B07BE6F94099A12550FA8 /* libPods-QueryMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QueryMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -154,6 +160,8 @@
 			children = (
 				8C77BB6B1BFFA1AA002F6645 /* AppDelegate.h */,
 				8C77BB6C1BFFA1AA002F6645 /* AppDelegate.m */,
+				8C98CFA31C10ACEE00B43A26 /* AddQuestionViewController.h */,
+				8C98CFA41C10ACEE00B43A26 /* AddQuestionViewController.m */,
 				8C3CFA191BFFCCDD00CF308E /* MWLoginViewController.h */,
 				8C3CFA1A1BFFCCDD00CF308E /* MWLoginViewController.m */,
 				8C3CFA1C1BFFD17F00CF308E /* MWSignUpViewController.h */,
@@ -169,6 +177,8 @@
 		8C4197191C0CF7AA00016BA0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C7E001D1C10B17A0022856C /* MWProfileImageView.h */,
+				8C7E001E1C10B17A0022856C /* MWProfileImageView.m */,
 				8C4197161C0CF7A600016BA0 /* MWTableViewCell.h */,
 				8C4197171C0CF7A600016BA0 /* MWTableViewCell.m */,
 			);
@@ -446,7 +456,9 @@
 			files = (
 				8C3CFA1E1BFFD17F00CF308E /* MWSignUpViewController.m in Sources */,
 				8C77BB6D1BFFA1AA002F6645 /* AppDelegate.m in Sources */,
+				8C7E001F1C10B17A0022856C /* MWProfileImageView.m in Sources */,
 				8C4197181C0CF7A600016BA0 /* MWTableViewCell.m in Sources */,
+				8C98CFA51C10ACEE00B43A26 /* AddQuestionViewController.m in Sources */,
 				8C41971E1C0E4CFD00016BA0 /* QuestionDetailViewController.m in Sources */,
 				8C3CFA1B1BFFCCDD00CF308E /* MWLoginViewController.m in Sources */,
 				8C1570CF1C03DBBC00D99382 /* MWUser.m in Sources */,
