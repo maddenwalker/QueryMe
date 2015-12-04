@@ -72,15 +72,21 @@ static int characterLimit = 200;
     
     
     //horizontal and vertical alignment for cancel button, profile picture, and the question text field
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_cancelButton(==44)]"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_cancelButton]"
                                                                       options:kNilOptions
                                                                       metrics:nil
                                                                         views:viewDictionary]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_cancelButton(==44)]-[_profilePictureImageView(==50)]-[_characterLimitLabel]"
-                                                                      options:NSLayoutFormatAlignAllCenterX
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_cancelButton]-[_profilePictureImageView(==50)]"
+                                                                      options:kNilOptions
                                                                       metrics:nil
                                                                         views:viewDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_profilePictureImageView]-[_characterLimitLabel]"
+                                                                     options:NSLayoutFormatAlignAllCenterX
+                                                                     metrics:nil
+                                                                        views:viewDictionary]];
+    
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[_profilePictureImageView(==50)]-[_questionTextField]-|"
                                                                       options:NSLayoutFormatAlignAllTop

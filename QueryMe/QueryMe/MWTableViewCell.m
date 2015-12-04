@@ -79,7 +79,7 @@ static UIColor *answerCountColor;
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
 
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_questionText]-10-[_answerCountText(==25)]"
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_questionText]-10-[_answerCountText(==25)]"
                                                                                  options:kNilOptions
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
@@ -100,7 +100,7 @@ static UIColor *answerCountColor;
     [layoutCell configureCell:layoutCell withObject:object];
     [layoutCell layoutIfNeeded];
     
-    return [layoutCell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
+    return CGRectGetMaxY(layoutCell.answerCountText.frame);
     
  }
 
