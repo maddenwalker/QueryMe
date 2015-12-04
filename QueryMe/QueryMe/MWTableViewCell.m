@@ -63,7 +63,7 @@ static UIColor *answerCountColor;
                                                                                 options:NSLayoutFormatAlignAllTop
                                                                                 metrics:nil
                                                                                   views:viewDictionary]];
-        
+
         self.profilePictureAspectRatioConstraint = [NSLayoutConstraint constraintWithItem:_profilePicture
                                                                                 attribute:NSLayoutAttributeHeight
                                                                                 relatedBy:NSLayoutRelationEqual
@@ -73,17 +73,13 @@ static UIColor *answerCountColor;
                                                                                  constant:50];
         
         [self.contentView addConstraints:@[self.profilePictureAspectRatioConstraint]];
-        
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_answerCountText(==75)]-10-[_questionInterestIndicator]|"
+
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_answerCountText(==75)]-10-[_questionInterestIndicator]"
                                                                                  options:NSLayoutFormatAlignAllBottom
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
-        
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_questionText]-10-[_answerCountText(==25)]-10-|"
-                                                                                 options:kNilOptions
-                                                                                 metrics:nil
-                                                                                   views:viewDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_questionText]-10-[_questionInterestIndicator(==25)]-10-|"
+
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_questionText]-10-[_answerCountText(==25)]"
                                                                                  options:kNilOptions
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
