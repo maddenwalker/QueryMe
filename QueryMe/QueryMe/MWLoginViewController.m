@@ -11,7 +11,6 @@
 #import <FBSDKCoreKit/FBSDKGraphRequest.h>
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit.h>
-#import <AFNetworking.h>
 
 @interface MWLoginViewController ()
 

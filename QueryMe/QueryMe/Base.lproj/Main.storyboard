@@ -29,13 +29,13 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="qhg-Hp-JDh">
                             <connections>
                                 <action selector="composeButtonPressed:" destination="fYy-GY-6L0" id="T26-yp-pbF"/>
-                                <segue destination="fHS-Un-cwH" kind="presentation" id="tjI-en-FLF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="logoutButton" destination="TVA-mm-aeZ" id="qSR-2K-rl4"/>
                         <segue destination="Ng5-eL-hj9" kind="show" identifier="questionDetailSegue" id="73u-HI-1u3"/>
+                        <segue destination="fHS-Un-cwH" kind="presentation" identifier="addQuestionSegue" id="GmK-qS-KeD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdB-XX-5JT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -53,43 +53,9 @@
                     <view key="view" contentMode="scaleToFill" id="AR2-He-zjg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFy-6C-hev">
-                                <rect key="frame" x="20" y="20" width="44" height="44"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Q9G-lf-jCv"/>
-                                    <constraint firstAttribute="width" constant="44" id="gTj-D2-cox"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="29"/>
-                                <state key="normal" title="x">
-                                    <color key="titleColor" red="0.32584697010000002" green="0.32583722469999998" blue="0.32584273819999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="dismissButtonPressed:" destination="fHS-Un-cwH" eventType="touchUpInside" id="ZkN-tK-QwI"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X6H-OK-aM2" customClass="MWProfileImageView">
-                                <rect key="frame" x="52" y="72" width="50" height="50"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="ifW-q2-mNn"/>
-                                    <constraint firstAttribute="width" constant="50" id="jUe-CZ-rN8"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="LFy-6C-hev" firstAttribute="top" secondItem="IyZ-Zn-ZZd" secondAttribute="bottom" id="Cvs-Ja-FlC"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="LFy-6C-hev" secondAttribute="leading" id="NHz-p3-GYZ"/>
-                            <constraint firstItem="X6H-OK-aM2" firstAttribute="leading" secondItem="AR2-He-zjg" secondAttribute="leadingMargin" constant="32" id="b4w-oU-nEb"/>
-                            <constraint firstItem="X6H-OK-aM2" firstAttribute="top" secondItem="LFy-6C-hev" secondAttribute="bottom" constant="8" id="sPe-Pn-7le"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="profilePictureImageView" destination="X6H-OK-aM2" id="bmt-fL-bhH"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3n7-2j-IUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

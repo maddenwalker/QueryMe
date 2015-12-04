@@ -36,7 +36,6 @@ static UIColor *answerCountColor;
         self.questionText = [[UILabel alloc] init];
         self.questionInterestIndicator = [[UILabel alloc] init];
         
-        
         //Format the cell with answers count
         self.answerCountText.font = lightFont;
         self.answerCountText.textColor = [UIColor whiteColor];

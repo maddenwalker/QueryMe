@@ -75,7 +75,7 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     
     if (self.userLoggedIn) {
         
-        NSLog(@"User signed in and ready to post");
+        [self performSegueWithIdentifier:@"addQuestionSegue" sender:nil];
         
     } else {
      
@@ -88,9 +88,7 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
         //sign up view controller
         MWSignUpViewController *signUpViewController = [[MWSignUpViewController alloc] init];
         [signUpViewController setDelegate:self];
-        
         [loginViewController setSignUpController:signUpViewController];
-        
         [self presentViewController:loginViewController animated:YES completion:NULL];
         
     }
