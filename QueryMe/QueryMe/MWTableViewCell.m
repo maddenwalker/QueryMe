@@ -115,7 +115,16 @@ static UIColor *answerCountColor;
     //Setup the question label
     
     self.questionText.text = [object objectForKey:@"questionText"];
-
+    //compare dates to see if this is a new question within the last 2 hours
+    NSDate *questionCreationDate = object.updatedAt;
+    NSDate *recentDate = [NSDate dateWithTimeIntervalSinceNow:7200];
+    
+    NSComparisonResult compareResults = [questionCreationDate compare:recentDate];
+    
+    if (compareResults == NSOrderedAscending) {
+        [self addFreshLabelToQuestion];
+    }
+    
     //try to fetch user profile photo in background
     
     MWUser *user = [object objectForKey:@"asker"];
@@ -152,7 +161,7 @@ static UIColor *answerCountColor;
 }
 
 - (void) addFreshLabelToQuestion {
-    self.freshLabelIndicator.text = NSLocalizedString(@"NEW", @"New label for questions");
+//    self.freshLabelIndicator.text = NSLocalizedString(@"NEW", @"New label for questions");
 }
 
 @end
