@@ -202,7 +202,7 @@ static int characterLimit = 200;
 
 //MARK: Helper Methods
 - (void) submitCurrentQuestionToParse {
-    
+     
     PFObject *newQuestion = [[PFObject alloc] initWithClassName:@"Question"];
     newQuestion[@"questionText"] = self.questionTextField.text;
     newQuestion[@"asker"] = [PFObject objectWithoutDataWithClassName:@"_User" objectId:self.currentUser.objectId];
