@@ -38,6 +38,10 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self refreshObjects];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

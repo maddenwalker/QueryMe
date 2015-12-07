@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSNumber *characterCount;
 @property (strong, nonatomic) NSNumber *characterLimit;
 @property (strong, nonatomic) UIButton *cancelButton;
+@property (strong, nonatomic) UIToolbar *inputAccessoryToolbar;
 @property (strong, nonatomic) UIButton *submitButton;
 @property (strong, nonatomic) MWProfileImageView *profilePictureImageView;
 @property (strong, nonatomic) SZTextView *questionTextField;
@@ -32,11 +33,16 @@ static int characterLimit = 200;
 
 @implementation AddQuestionViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.currentUser = [MWUser currentUser];
+    self.inputAccessoryToolbar = [[UIToolbar alloc] init];
+    [self setupInputAccessoryView];
     
     //Initialize all of your UI elements that you have on the screen
     self.profilePictureImageView = [[MWProfileImageView alloc] init];
@@ -68,16 +74,12 @@ static int characterLimit = 200;
     self.questionTextField.placeholderTextColor = [UIColor lightGrayColor];
     self.questionTextField.fadeTime = 0.5;
     self.questionTextField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+    [self.questionTextField setInputAccessoryView:_inputAccessoryToolbar];
     
-    //Setup the submit button
-    //TODO: Your button is extremely ugly, and would be way cooler to be a view on the bottom of the screen and then slides up with keyboard
-    [self.submitButton setTitle:NSLocalizedString(@"Submit your Question", @"submission button for add question screen") forState:UIControlStateNormal];
-    [self.submitButton addTarget:self action:@selector(submitButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    //TODO: Refactor code because of DRY wrt colors
-    self.submitButton.backgroundColor = [UIColor colorWithRed:56.0 / 255.0 green:165.0 / 255.0 blue:219.0 / 255.0 alpha:1.0];
-    self.submitButton.tintColor = [UIColor whiteColor];
+    //Become first responder so we can have input accessory view even when the keyboard is hidden
+    [self becomeFirstResponder];
     
-    for (UIView *view in @[self.cancelButton, self.profilePictureImageView, self.questionTextField, self.characterLimitLabel, self.submitButton]) {
+    for (UIView *view in @[self.cancelButton, self.profilePictureImageView, self.questionTextField, self.characterLimitLabel]) {
         [self.view addSubview:view];
         view.translatesAutoresizingMaskIntoConstraints = NO;
     }
@@ -99,16 +101,6 @@ static int characterLimit = 200;
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_profilePictureImageView]-[_characterLimitLabel]"
                                                                      options:NSLayoutFormatAlignAllCenterX
                                                                      metrics:nil
-                                                                        views:viewDictionary]];
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_submitButton]|"
-                                                                      options:kNilOptions
-                                                                      metrics:nil
-                                                                        views:viewDictionary]];
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_submitButton]|"
-                                                                      options:kNilOptions
-                                                                      metrics:nil
                                                                         views:viewDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[_profilePictureImageView(==50)]-[_questionTextField]-|"
@@ -146,11 +138,9 @@ static int characterLimit = 200;
 - (void)submitButtonPressed:(UIButton *)sender {
     
     if (self.questionTextField.text.length > 0) {
-        if ([self submitCurrentQuestionToParse]) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+        [self submitCurrentQuestionToParse];
             //TODO: need to have this method tell a delegate, the table view controller that there is new data and that it should refresh
             //TODO: Ideally add some user feedback that the question is actually submitted?
-        };
     } else {
         //TODO: Add uialertview that the user has entered no text and we cannot submit a blank question
     }
@@ -185,24 +175,40 @@ static int characterLimit = 200;
 
 //TODO: Need to update the fact that the text here may go over 200 characters
 
+//MARK: Setup Accessory Views for the Keyboard
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (UIToolbar *)inputAccessoryView {
+    return self.inputAccessoryToolbar;
+}
+
+- (void)setupInputAccessoryView {
+    
+    self.inputAccessoryToolbar.barTintColor = [UIColor colorWithRed:56.0 / 255.0 green:165.0 / 255.0 blue:219.0 / 255.0 alpha:1.0];
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *submitButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Submit your Question", @"submission button for add question screen")  style:UIBarButtonItemStylePlain target:self action:@selector(submitButtonPressed:)];
+    submitButton.tintColor = [UIColor whiteColor];
+    [self.inputAccessoryToolbar sizeToFit];
+    [self.inputAccessoryToolbar setItems:@[flexSpace, submitButton, flexSpace]];
+    
+}
+
 //MARK: Helper Methods
-- (BOOL) submitCurrentQuestionToParse {
-   
-    NSError *error;
+- (void) submitCurrentQuestionToParse {
     
     PFObject *newQuestion = [[PFObject alloc] initWithClassName:@"Question"];
     newQuestion[@"questionText"] = self.questionTextField.text;
     newQuestion[@"asker"] = [PFObject objectWithoutDataWithClassName:@"_User" objectId:self.currentUser.objectId];
     //saving the object directly and blocking main thread on purpose here because I want the user to see their question when they go to the main view controller, obviously an issue when network connectivity lost.
-    [newQuestion save:&error];
-    
-    if (!error) {
-        NSLog(@"Data saved successfully to parse");
-        return YES;
-    }
-    //TODO: need a way to gracefully fail here because if there are network issues, then this could be an issue, perhaps better to add saveInBackground
-    return NO;
-    
+    [newQuestion saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"Data saved successfully to parse");
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
 }
 
 @end
