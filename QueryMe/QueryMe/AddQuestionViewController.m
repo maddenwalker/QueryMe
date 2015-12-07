@@ -139,10 +139,14 @@ static int characterLimit = 200;
     
     if (self.questionTextField.text.length > 0) {
         [self submitCurrentQuestionToParse];
-            //TODO: need to have this method tell a delegate, the table view controller that there is new data and that it should refresh
-            //TODO: Ideally add some user feedback that the question is actually submitted?
+        [self dismissViewControllerAnimated:YES completion:nil];
     } else {
-        //TODO: Add uialertview that the user has entered no text and we cannot submit a blank question
+        UIAlertController *newAlertView = [[UIAlertController alloc] init];
+        [newAlertView setTitle:NSLocalizedString(@"You need to ask something!", @"Title for user feedback when there are no characters")];
+        [newAlertView setTitle:NSLocalizedString(@"The world is full of questions, why not ask something simple, like \"What is the meaning of life?\"", @"Message for alert view when there are no characters")];
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [newAlertView addAction:okButton];
+        [self showViewController:newAlertView sender:nil];
     }
 }
 
@@ -206,7 +210,6 @@ static int characterLimit = 200;
     [newQuestion saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (!error) {
             NSLog(@"Data saved successfully to parse");
-            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }

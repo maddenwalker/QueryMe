@@ -24,6 +24,7 @@
 static UIFont *lightFont;
 static UIFont *boldFont;
 static UIColor *answerCountColor;
+static UIColor *newLabelColor;
 
 @implementation MWTableViewCell
 
@@ -54,7 +55,8 @@ static UIColor *answerCountColor;
         
         //Fresh label
         self.freshLabelIndicator.text = @"";
-        self.freshLabelIndicator.backgroundColor = [UIColor greenColor];
+        self.freshLabelIndicator.font = lightFont;
+        self.freshLabelIndicator.backgroundColor = newLabelColor;
         self.freshLabelIndicator.textColor = [UIColor whiteColor];
         
         //Add labels to view
@@ -82,7 +84,7 @@ static UIColor *answerCountColor;
         [self.contentView addConstraints:@[self.profilePictureAspectRatioConstraint]];
 
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_freshLabelIndicator]-[_answerCountText(==75)]-10-[_questionInterestIndicator]"
-                                                                                 options:NSLayoutFormatAlignAllBottom
+                                                                                 options:NSLayoutFormatAlignAllCenterY
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
 
@@ -100,6 +102,7 @@ static UIColor *answerCountColor;
     lightFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:12];
     boldFont =  [UIFont fontWithName:@"HelveticaNeue" size:12];
     answerCountColor = [UIColor colorWithRed:56.0 / 255.0 green:165.0 / 255.0 blue:219.0 / 255.0 alpha:1.0];
+    newLabelColor = [UIColor colorWithRed:41.0 / 255.0 green:187.0 / 255.0 blue:156.0 / 255.0 alpha:1.0];
 }
 
 + (CGFloat)heightForBasicCellWithObject:(PFObject *)object andWidth:(CGFloat)width {
@@ -117,11 +120,11 @@ static UIColor *answerCountColor;
     self.questionText.text = [object objectForKey:@"questionText"];
     //compare dates to see if this is a new question within the last 2 hours
     NSDate *questionCreationDate = object.updatedAt;
-    NSDate *recentDate = [NSDate dateWithTimeIntervalSinceNow:7200];
+    NSDate *recentDate = [NSDate dateWithTimeIntervalSinceNow:-7200];
     
     NSComparisonResult compareResults = [questionCreationDate compare:recentDate];
     
-    if (compareResults == NSOrderedAscending) {
+    if (compareResults == NSOrderedDescending) {
         [self addFreshLabelToQuestion];
     }
     
@@ -161,7 +164,7 @@ static UIColor *answerCountColor;
 }
 
 - (void) addFreshLabelToQuestion {
-//    self.freshLabelIndicator.text = NSLocalizedString(@"NEW", @"New label for questions");
+    self.freshLabelIndicator.text = NSLocalizedString(@" NEW ", @"New label for questions");
 }
 
 @end
