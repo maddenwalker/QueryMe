@@ -18,8 +18,6 @@
 
 @implementation MWLoginViewController
 
-@synthesize delegate;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

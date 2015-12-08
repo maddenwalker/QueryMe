@@ -29,7 +29,7 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
 @implementation MainQuestionTableViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad];    
     [self refreshObjects];
     
     if ([MWUser currentUser]) {
@@ -106,7 +106,8 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (BOOL)logInViewController:(MWLoginViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
+- (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
+    
     //checking to see if both fields have been completed to for login
     if (username && password && username.length != 0 && password.length != 0) {
         return YES;
@@ -115,12 +116,14 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     [self showUserAlert:logInController withTitle:@"Missing Information" withMessage:@"Make sure you fill out all of the information!"];
     
     return NO;
+
     
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [self toggleUserSignedIn];
     [self dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 - (void)loginViewController:(MWLoginViewController *)loginController didFailToLogInWithError:(NSError*)error {
