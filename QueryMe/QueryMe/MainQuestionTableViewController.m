@@ -11,6 +11,7 @@
 #import "MWTableViewCell.h"
 #import "MWLoginViewController.h"
 #import "MWSignUpViewController.h"
+#import "AddQuestionViewController.h"
 #import "QuestionDetailViewController.h"
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -20,7 +21,7 @@
 static NSString * const simpleTableIdentifier = @"QuestionCell";
 static NSString * const customCellIdentifier = @"CustomQuestionCell";
 
-@interface MainQuestionTableViewController () <MWLoginVewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface MainQuestionTableViewController () <MWLoginVewControllerDelegate, PFSignUpViewControllerDelegate, AddQuestionViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (assign, nonatomic) BOOL userLoggedIn;
 
@@ -66,6 +67,10 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     }
     return self;
 }
+
+
+
+//MARK: Logout Button
 - (IBAction)logoutButtonPressed:(UIBarButtonItem *)sender {
     
     [MWUser logOut];
@@ -173,6 +178,11 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     NSLog(@"Sign up view dismissed by user");
 }
 
+//MARK: AddQuestionViewControllerDelegate Methods
+
+- (void)questionSuccessfullySubmittedToParse {
+    [self refreshObjects];
+}
 
 //MARK: Setup Query for TableViewCell
 - (PFQuery *)baseQuery {
@@ -240,6 +250,9 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
         QuestionDetailViewController *detailVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         detailVC.questionText = ((MWTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).questionText.text;
+    } else if ([[segue identifier] isEqualToString:@"addQuestionSegue"]) {
+        AddQuestionViewController *addVC = [segue destinationViewController];
+        addVC.delegate = self;
     }
 }
 

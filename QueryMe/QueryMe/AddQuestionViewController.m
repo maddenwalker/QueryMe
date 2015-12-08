@@ -210,6 +210,9 @@ static int characterLimit = 200;
     [newQuestion saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (!error) {
             NSLog(@"Data saved successfully to parse");
+            if ([self.delegate respondsToSelector:@selector(questionSuccessfullySubmittedToParse)]) {
+                [self.delegate questionSuccessfullySubmittedToParse];
+            }
         }
     }];
 }
