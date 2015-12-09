@@ -126,6 +126,8 @@ static UIColor *newLabelColor;
     
     if (compareResults == NSOrderedDescending) {
         [self addFreshLabelToQuestion];
+    } else {
+        self.freshLabelIndicator.text = @"";
     }
     
     //try to fetch user profile photo in background
