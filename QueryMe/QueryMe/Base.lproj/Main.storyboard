@@ -34,8 +34,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="logoutButton" destination="TVA-mm-aeZ" id="qSR-2K-rl4"/>
-                        <segue destination="Ng5-eL-hj9" kind="show" identifier="questionDetailSegue" id="73u-HI-1u3"/>
                         <segue destination="fHS-Un-cwH" kind="presentation" identifier="addQuestionSegue" id="GmK-qS-KeD"/>
+                        <segue destination="Vw3-Io-WJ8" kind="show" identifier="questionDetailSegue" id="KsF-mk-r35"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdB-XX-5JT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -61,51 +61,95 @@
             </objects>
             <point key="canvasLocation" x="2332" y="-122"/>
         </scene>
-        <!--Question Detail View Controller-->
-        <scene sceneID="6IR-lW-WOf">
+        <!--Question Detail Table View Controller-->
+        <scene sceneID="4NY-4Z-Bw1">
             <objects>
-                <viewController id="Ng5-eL-hj9" customClass="QuestionDetailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="P4e-If-Mo3"/>
-                        <viewControllerLayoutGuide type="bottom" id="HGJ-i5-Gpl"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Q3w-sw-iGg">
+                <tableViewController id="Vw3-Io-WJ8" customClass="QuestionDetailTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="TP3-ZF-YCe">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;User&gt; Asked:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqC-sR-hlx">
-                                <rect key="frame" x="20" y="72" width="560" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Question Text Goes Here . . ." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-KW-ZPS">
-                                <rect key="frame" x="20" y="101" width="560" height="17"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="leadingMargin" secondItem="sEX-KW-ZPS" secondAttribute="leading" id="am5-hT-ZEQ"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="wqC-sR-hlx" secondAttribute="leading" id="i8n-za-Yb4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wqC-sR-hlx" secondAttribute="trailing" id="iXk-Uc-cNN"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sEX-KW-ZPS" secondAttribute="trailing" id="l5B-il-TDQ"/>
-                            <constraint firstItem="wqC-sR-hlx" firstAttribute="top" secondItem="P4e-If-Mo3" secondAttribute="bottom" constant="8" id="ptW-GB-fBR"/>
-                            <constraint firstItem="sEX-KW-ZPS" firstAttribute="top" secondItem="wqC-sR-hlx" secondAttribute="bottom" constant="8" id="uKF-rw-8ud"/>
-                        </constraints>
-                    </view>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="pju-3d-RTp">
+                            <rect key="frame" x="0.0" y="64" width="600" height="80"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;User&gt; asks . . . " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHd-jC-KTn">
+                                    <rect key="frame" x="8" y="34.5" width="89" height="14"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="12"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text Goes Here . . ." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2X9-99-SJg">
+                                    <rect key="frame" x="8" y="56.5" width="584" height="15.5"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="2X9-99-SJg" secondAttribute="bottom" constant="8" id="6C7-ui-HeQ"/>
+                                <constraint firstItem="2X9-99-SJg" firstAttribute="leading" secondItem="pju-3d-RTp" secondAttribute="leading" constant="8" id="XzT-a2-7Da"/>
+                                <constraint firstItem="2X9-99-SJg" firstAttribute="top" secondItem="BHd-jC-KTn" secondAttribute="bottom" constant="8.5" id="Yj3-w8-FQR"/>
+                                <constraint firstAttribute="trailing" secondItem="2X9-99-SJg" secondAttribute="trailing" constant="8" id="fHw-KS-K3F"/>
+                                <constraint firstItem="BHd-jC-KTn" firstAttribute="leading" secondItem="pju-3d-RTp" secondAttribute="leading" constant="8" id="yMA-LE-fAi"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="answerCell" rowHeight="80" id="qLU-Wb-ICN">
+                                <rect key="frame" x="0.0" y="172" width="600" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qLU-Wb-ICN" id="e5F-8P-cW0">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AaK-6V-5Fh" customClass="MWProfileImageView">
+                                            <rect key="frame" x="8" y="15" width="50" height="50"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="9dH-ku-9wj"/>
+                                                <constraint firstAttribute="width" constant="50" id="p4p-fd-ly5"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Place your answer here . . " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RES-em-Jdn">
+                                            <rect key="frame" x="66" y="29" width="526" height="21"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="RES-em-Jdn" secondAttribute="trailing" id="MsA-Gg-TQP"/>
+                                        <constraint firstItem="RES-em-Jdn" firstAttribute="centerY" secondItem="AaK-6V-5Fh" secondAttribute="centerY" id="NnY-B0-3ST"/>
+                                        <constraint firstItem="RES-em-Jdn" firstAttribute="leading" secondItem="AaK-6V-5Fh" secondAttribute="trailing" constant="8" id="dK8-W3-0lH"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="AaK-6V-5Fh" secondAttribute="leading" id="rb9-eI-SEi"/>
+                                        <constraint firstItem="AaK-6V-5Fh" firstAttribute="centerY" secondItem="e5F-8P-cW0" secondAttribute="centerY" id="vc8-G4-TBR"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="Vw3-Io-WJ8" id="nMc-5b-hUH"/>
+                            <outlet property="delegate" destination="Vw3-Io-WJ8" id="LMY-LV-GOT"/>
+                        </connections>
+                    </tableView>
                     <connections>
-                        <outlet property="questionTextLabel" destination="sEX-KW-ZPS" id="7GB-S8-kgu"/>
+                        <outlet property="questionTextLabel" destination="2X9-99-SJg" id="UJF-2K-Ayx"/>
+                        <outlet property="questionView" destination="pju-3d-RTp" id="zXu-Ca-p4h"/>
+                        <outlet property="userNameLabel" destination="BHd-jC-KTn" id="Anu-uS-LfW"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KSv-uM-DI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NxM-L6-PqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2332" y="589"/>
+            <point key="canvasLocation" x="2332" y="596"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="swK-w3-R77">

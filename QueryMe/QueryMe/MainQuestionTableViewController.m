@@ -12,7 +12,7 @@
 #import "MWLoginViewController.h"
 #import "MWSignUpViewController.h"
 #import "AddQuestionViewController.h"
-#import "QuestionDetailViewController.h"
+#import "QuestionDetailTableViewController.h"
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -242,14 +242,18 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"questionDetailSegue" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+}
+
 //MARK: Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"questionDetailSegue"]) {
-        QuestionDetailViewController *detailVC = [segue destinationViewController];
+        QuestionDetailTableViewController *detailVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        detailVC.questionText = ((MWTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).questionText.text;
+        detailVC.questionObject = [self.objects objectAtIndex:indexPath.row];
     } else if ([[segue identifier] isEqualToString:@"addQuestionSegue"]) {
         AddQuestionViewController *addVC = [segue destinationViewController];
         addVC.delegate = self;
