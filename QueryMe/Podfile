@@ -4,8 +4,10 @@
 # use_frameworks!
 
 target 'QueryMe' do
-
+  pod 'Parse'
   pod 'ParseUI'
+  pod 'ParseFacebookUtilsV4'
+  pod 'SZTextView'
 
 end
 
