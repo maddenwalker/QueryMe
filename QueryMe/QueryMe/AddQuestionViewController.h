@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AddQuestionViewControllerDelegate <NSObject>
+
+@optional
+
+- (void) questionSuccessfullySubmittedToParse;
+
+@end
+
 @interface AddQuestionViewController : UIViewController
+
+@property (weak, nonatomic) id <AddQuestionViewControllerDelegate> delegate;
 
 @end

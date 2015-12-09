@@ -16,6 +16,7 @@
 @property (strong, nonatomic) MWProfileImageView *profilePicture;
 @property (strong, nonatomic) UILabel *answerCountText;
 @property (strong, nonatomic) UILabel *questionInterestIndicator;
+@property (strong, nonatomic) UILabel *freshLabelIndicator;
 @property (strong, nonatomic) NSLayoutConstraint *profilePictureAspectRatioConstraint;
 
 @end
@@ -23,6 +24,7 @@
 static UIFont *lightFont;
 static UIFont *boldFont;
 static UIColor *answerCountColor;
+static UIColor *newLabelColor;
 
 @implementation MWTableViewCell
 
@@ -35,6 +37,7 @@ static UIColor *answerCountColor;
         self.answerCountText = [[UILabel alloc] init];
         self.questionText = [[UILabel alloc] init];
         self.questionInterestIndicator = [[UILabel alloc] init];
+        self.freshLabelIndicator = [[UILabel alloc] init];
         
         //Format the cell with answers count
         self.answerCountText.font = lightFont;
@@ -50,13 +53,19 @@ static UIColor *answerCountColor;
         self.questionText.font = boldFont;
         self.questionText.numberOfLines = 0;
         
+        //Fresh label
+        self.freshLabelIndicator.text = @"";
+        self.freshLabelIndicator.font = lightFont;
+        self.freshLabelIndicator.backgroundColor = newLabelColor;
+        self.freshLabelIndicator.textColor = [UIColor whiteColor];
+        
         //Add labels to view
-        for (UIView *view in @[self.questionText, self.profilePicture, self.answerCountText, self.questionInterestIndicator]) {
+        for (UIView *view in @[self.questionText, self.profilePicture, self.freshLabelIndicator, self.answerCountText, self.questionInterestIndicator]) {
             [self.contentView addSubview:view];
             view.translatesAutoresizingMaskIntoConstraints = NO;
         }
         
-        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_questionText, _profilePicture, _answerCountText, _questionInterestIndicator);
+        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_questionText, _profilePicture, _freshLabelIndicator, _answerCountText, _questionInterestIndicator);
         
         //Add constraints to the different labels
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_questionText][_profilePicture(==50)]-10-|"
@@ -74,8 +83,8 @@ static UIColor *answerCountColor;
         
         [self.contentView addConstraints:@[self.profilePictureAspectRatioConstraint]];
 
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_answerCountText(==75)]-10-[_questionInterestIndicator]"
-                                                                                 options:NSLayoutFormatAlignAllBottom
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_freshLabelIndicator]-[_answerCountText(==75)]-10-[_questionInterestIndicator]"
+                                                                                 options:NSLayoutFormatAlignAllCenterY
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
 
@@ -93,6 +102,7 @@ static UIColor *answerCountColor;
     lightFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:12];
     boldFont =  [UIFont fontWithName:@"HelveticaNeue" size:12];
     answerCountColor = [UIColor colorWithRed:56.0 / 255.0 green:165.0 / 255.0 blue:219.0 / 255.0 alpha:1.0];
+    newLabelColor = [UIColor colorWithRed:41.0 / 255.0 green:187.0 / 255.0 blue:156.0 / 255.0 alpha:1.0];
 }
 
 + (CGFloat)heightForBasicCellWithObject:(PFObject *)object andWidth:(CGFloat)width {
@@ -108,6 +118,15 @@ static UIColor *answerCountColor;
     //Setup the question label
     
     self.questionText.text = [object objectForKey:@"questionText"];
+    //compare dates to see if this is a new question within the last 2 hours
+    NSDate *questionCreationDate = object.updatedAt;
+    NSDate *recentDate = [NSDate dateWithTimeIntervalSinceNow:-7200];
+    
+    NSComparisonResult compareResults = [questionCreationDate compare:recentDate];
+    
+    if (compareResults == NSOrderedDescending) {
+        [self addFreshLabelToQuestion];
+    }
     
     //try to fetch user profile photo in background
     
@@ -142,6 +161,10 @@ static UIColor *answerCountColor;
             break;
     }
     
+}
+
+- (void) addFreshLabelToQuestion {
+    self.freshLabelIndicator.text = NSLocalizedString(@" NEW ", @"New label for questions");
 }
 
 @end

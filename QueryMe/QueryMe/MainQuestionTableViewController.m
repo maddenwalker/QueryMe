@@ -11,6 +11,7 @@
 #import "MWTableViewCell.h"
 #import "MWLoginViewController.h"
 #import "MWSignUpViewController.h"
+#import "AddQuestionViewController.h"
 #import "QuestionDetailViewController.h"
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -20,7 +21,7 @@
 static NSString * const simpleTableIdentifier = @"QuestionCell";
 static NSString * const customCellIdentifier = @"CustomQuestionCell";
 
-@interface MainQuestionTableViewController () <MWLoginVewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface MainQuestionTableViewController () <MWLoginVewControllerDelegate, PFSignUpViewControllerDelegate, AddQuestionViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (assign, nonatomic) BOOL userLoggedIn;
 
@@ -29,13 +30,17 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
 @implementation MainQuestionTableViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad];    
     [self refreshObjects];
     
     if ([MWUser currentUser]) {
         [self toggleUserSignedIn];
     }
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self refreshObjects];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,6 +67,10 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     }
     return self;
 }
+
+
+
+//MARK: Logout Button
 - (IBAction)logoutButtonPressed:(UIBarButtonItem *)sender {
     
     [MWUser logOut];
@@ -102,7 +111,8 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (BOOL)logInViewController:(MWLoginViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
+- (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
+    
     //checking to see if both fields have been completed to for login
     if (username && password && username.length != 0 && password.length != 0) {
         return YES;
@@ -111,12 +121,14 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     [self showUserAlert:logInController withTitle:@"Missing Information" withMessage:@"Make sure you fill out all of the information!"];
     
     return NO;
+
     
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [self toggleUserSignedIn];
     [self dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 - (void)loginViewController:(MWLoginViewController *)loginController didFailToLogInWithError:(NSError*)error {
@@ -166,6 +178,11 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     NSLog(@"Sign up view dismissed by user");
 }
 
+//MARK: AddQuestionViewControllerDelegate Methods
+
+- (void)questionSuccessfullySubmittedToParse {
+    [self refreshObjects];
+}
 
 //MARK: Setup Query for TableViewCell
 - (PFQuery *)baseQuery {
@@ -233,6 +250,9 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
         QuestionDetailViewController *detailVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         detailVC.questionText = ((MWTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).questionText.text;
+    } else if ([[segue identifier] isEqualToString:@"addQuestionSegue"]) {
+        AddQuestionViewController *addVC = [segue destinationViewController];
+        addVC.delegate = self;
     }
 }
 
