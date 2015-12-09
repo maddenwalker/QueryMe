@@ -11,6 +11,6 @@
 
 @interface MWProfileImageView : PFImageView
 
-- (BOOL) setProfilePictureToUser:(MWUser *)user;
+- (void) setProfilePictureToUser:(MWUser *)user;
 
 @end
