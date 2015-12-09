@@ -22,16 +22,18 @@
     return self;
 }
 
-- (BOOL) setProfilePictureToUser:(MWUser *)user {
+- (void) setProfilePictureToUser:(MWUser *)user {
     
     if ([user[@"profilePictureExists"] boolValue]) {
         PFFile *profilePicture = user[@"profilePicture"];
         self.file = profilePicture;
         [self loadInBackground];
-        return YES;
     }
-    
-    return NO;
+    else
+    {
+        self.file = nil;
+        self.image = [UIImage imageNamed:@"emptyProfilePicture"];
+    }
 }
 
 @end
