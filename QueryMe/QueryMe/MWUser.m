@@ -12,7 +12,9 @@
 @implementation MWUser
 
 @dynamic firstName;
+@dynamic firstNameExists;
 @dynamic profilePicture;
+@dynamic profilePictureExists;
 @dynamic profileDescription;
 
 @end

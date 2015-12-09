@@ -8,6 +8,17 @@
 
 #import <ParseUI/ParseUI.h>
 
+@class MWLoginViewController;
+
+@protocol MWLoginVewControllerDelegate <PFLogInViewControllerDelegate>
+@optional
+
+-(void)logInViewController:(MWLoginViewController *)logInController didLogInUserWithFacebook:(PFUser *)user;
+
+@end
+
 @interface MWLoginViewController : PFLogInViewController
+
+@property (weak, nonatomic) id <MWLoginVewControllerDelegate> delegate;
 
 @end

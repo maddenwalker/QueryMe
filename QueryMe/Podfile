@@ -7,7 +7,7 @@ target 'QueryMe' do
   pod 'Parse'
   pod 'ParseUI'
   pod 'ParseFacebookUtilsV4'
-  pod 'AFNetworking'
+  pod 'SZTextView'
 
 end
 
