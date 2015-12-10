@@ -32,6 +32,8 @@
 		8C77BBBB1BFFA325002F6645 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C77BBBA1BFFA325002F6645 /* libsqlite3.tbd */; };
 		8C7E001F1C10B17A0022856C /* MWProfileImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E001E1C10B17A0022856C /* MWProfileImageView.m */; };
 		8C98CFA51C10ACEE00B43A26 /* AddQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C98CFA41C10ACEE00B43A26 /* AddQuestionViewController.m */; };
+		8C99EA0F1C1A078600E2B901 /* MWDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C99EA0E1C1A078600E2B901 /* MWDetailTableViewCell.m */; };
+		8C99EA121C1A16BE00E2B901 /* MWDetailQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C99EA111C1A16BE00E2B901 /* MWDetailQuestionView.m */; };
 		8CA84FF71C18AD5400FDB321 /* QuestionDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA84FF61C18AD5400FDB321 /* QuestionDetailTableViewController.m */; };
 		DC260399E66A35F186E8A958 /* libPods-QueryMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B18B07BE6F94099A12550FA8 /* libPods-QueryMe.a */; };
 /* End PBXBuildFile section */
@@ -95,6 +97,10 @@
 		8C7E001E1C10B17A0022856C /* MWProfileImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWProfileImageView.m; sourceTree = "<group>"; };
 		8C98CFA31C10ACEE00B43A26 /* AddQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddQuestionViewController.h; sourceTree = "<group>"; };
 		8C98CFA41C10ACEE00B43A26 /* AddQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddQuestionViewController.m; sourceTree = "<group>"; };
+		8C99EA0D1C1A078600E2B901 /* MWDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWDetailTableViewCell.h; sourceTree = "<group>"; };
+		8C99EA0E1C1A078600E2B901 /* MWDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWDetailTableViewCell.m; sourceTree = "<group>"; };
+		8C99EA101C1A16BE00E2B901 /* MWDetailQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWDetailQuestionView.h; sourceTree = "<group>"; };
+		8C99EA111C1A16BE00E2B901 /* MWDetailQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWDetailQuestionView.m; sourceTree = "<group>"; };
 		8CA84FF51C18AD5400FDB321 /* QuestionDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailTableViewController.h; sourceTree = "<group>"; };
 		8CA84FF61C18AD5400FDB321 /* QuestionDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailTableViewController.m; sourceTree = "<group>"; };
 		B18B07BE6F94099A12550FA8 /* libPods-QueryMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QueryMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +187,10 @@
 				8C7E001E1C10B17A0022856C /* MWProfileImageView.m */,
 				8C4197161C0CF7A600016BA0 /* MWTableViewCell.h */,
 				8C4197171C0CF7A600016BA0 /* MWTableViewCell.m */,
+				8C99EA0D1C1A078600E2B901 /* MWDetailTableViewCell.h */,
+				8C99EA0E1C1A078600E2B901 /* MWDetailTableViewCell.m */,
+				8C99EA101C1A16BE00E2B901 /* MWDetailQuestionView.h */,
+				8C99EA111C1A16BE00E2B901 /* MWDetailQuestionView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -459,7 +469,9 @@
 				8C7E001F1C10B17A0022856C /* MWProfileImageView.m in Sources */,
 				8C4197181C0CF7A600016BA0 /* MWTableViewCell.m in Sources */,
 				8C98CFA51C10ACEE00B43A26 /* AddQuestionViewController.m in Sources */,
+				8C99EA0F1C1A078600E2B901 /* MWDetailTableViewCell.m in Sources */,
 				8C3CFA1B1BFFCCDD00CF308E /* MWLoginViewController.m in Sources */,
+				8C99EA121C1A16BE00E2B901 /* MWDetailQuestionView.m in Sources */,
 				8C1570CF1C03DBBC00D99382 /* MWUser.m in Sources */,
 				8C4197151C0CD0B800016BA0 /* MainQuestionTableViewController.m in Sources */,
 				8CA84FF71C18AD5400FDB321 /* QuestionDetailTableViewController.m in Sources */,

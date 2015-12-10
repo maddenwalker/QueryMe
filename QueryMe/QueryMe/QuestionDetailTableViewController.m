@@ -8,12 +8,12 @@
 
 #import "QuestionDetailTableViewController.h"
 #import "MWUser.h"
-#import "MWProfileImageView.h"
+#import "MWDetailQuestionView.h"
+#import "MWDetailTableViewCell.h"
 
 @interface QuestionDetailTableViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *questionTextLabel;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UIView *questionView;
+
+@property (strong, nonatomic) MWDetailQuestionView *questionView;
 
 @end
 
@@ -22,28 +22,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.questionView = [[MWDetailQuestionView alloc] init];
+    self.questionView.layer.zPosition++;
+    [self.questionView configureViewwithObject:self.questionObject];
+    self.questionView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), CGRectGetWidth(self.view.bounds), 100);
+    [self.navigationController.view addSubview:self.questionView];
     
-    //Setup the question text
-    self.questionTextLabel.text = [self.questionObject objectForKey:@"questionText"];
-    
-    //Setup user and label
-    MWUser *user = [self.questionObject objectForKey:@"asker"];
-    
-    NSString *firstNameString;
-    
-    if ([user[@"firstNameExists"] boolValue]) {
-        firstNameString = [user objectForKey:@"firstName"];
-    } else {
-        firstNameString = @"Anonymous";
-    }
-    
-    self.userNameLabel.text = [NSString stringWithFormat:@"%@ asks . . .", firstNameString];
-    
-    CGFloat itemHeight = 100;
-    
-    //Set the UIView Custom Height for the questionView
-    self.questionView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), CGRectGetWidth(self.view.frame), itemHeight);
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(self.questionView.frame), 0, 0, 0);
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(CGRectGetHeight(self.questionView.frame), 0, 0, 0);
     
 }
 
@@ -68,6 +54,11 @@
     return self;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.questionView removeFromSuperview];
+}
+
+
 - (PFQuery *)baseQuery {
     PFQuery *answerQuery = [PFQuery queryWithClassName:self.parseClassName];
     [answerQuery whereKey:@"questionAnswered" equalTo:self.questionObject];
@@ -83,16 +74,31 @@
 }
 
 
-- (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-    PFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"answerCell"];
+//MARK: TableViewDelegate - Set TableViewHeight and Number of Sections
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.objects.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 200;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [MWDetailTableViewCell heightForBasicCellWithObject:[self.objects objectAtIndex:indexPath.row] andWidth:CGRectGetWidth(self.view.bounds)];
+}
+
+
+
+- (MWDetailTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    NSString *customIdentifier = @"answerCell";
     
-    MWProfileImageView *profileImageView = [[MWProfileImageView alloc] init];
-    profileImageView = (MWProfileImageView *)[cell viewWithTag:100];
-    UILabel *answerLabel = (UILabel *)[cell viewWithTag:101];
+    MWDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:customIdentifier];
     
-    [profileImageView setProfilePictureToUser:object[@"answerer"]];
+    if (cell == nil) {
+        cell = [[MWDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:customIdentifier];
+    }
     
-    answerLabel.text = object[@"answerText"];
+    [cell configureCell:cell withObject:object];
     
     return cell;
 }
