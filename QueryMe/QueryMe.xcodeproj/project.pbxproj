@@ -37,6 +37,7 @@
 		8C99EA0F1C1A078600E2B901 /* MWDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C99EA0E1C1A078600E2B901 /* MWDetailTableViewCell.m */; };
 		8C99EA121C1A16BE00E2B901 /* MWDetailQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C99EA111C1A16BE00E2B901 /* MWDetailQuestionView.m */; };
 		8CA84FF71C18AD5400FDB321 /* QuestionDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA84FF61C18AD5400FDB321 /* QuestionDetailTableViewController.m */; };
+		8CB564CE1C1B6E790021272B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB564CD1C1B6E790021272B /* ProfileViewController.m */; };
 		DC260399E66A35F186E8A958 /* libPods-QueryMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B18B07BE6F94099A12550FA8 /* libPods-QueryMe.a */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,8 @@
 		8C99EA111C1A16BE00E2B901 /* MWDetailQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWDetailQuestionView.m; sourceTree = "<group>"; };
 		8CA84FF51C18AD5400FDB321 /* QuestionDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailTableViewController.h; sourceTree = "<group>"; };
 		8CA84FF61C18AD5400FDB321 /* QuestionDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailTableViewController.m; sourceTree = "<group>"; };
+		8CB564CC1C1B6E790021272B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		8CB564CD1C1B6E790021272B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		B18B07BE6F94099A12550FA8 /* libPods-QueryMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QueryMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -182,6 +185,8 @@
 				8C98CFA41C10ACEE00B43A26 /* AddQuestionViewController.m */,
 				8CA84FF51C18AD5400FDB321 /* QuestionDetailTableViewController.h */,
 				8CA84FF61C18AD5400FDB321 /* QuestionDetailTableViewController.m */,
+				8CB564CC1C1B6E790021272B /* ProfileViewController.h */,
+				8CB564CD1C1B6E790021272B /* ProfileViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 				8C77BB6D1BFFA1AA002F6645 /* AppDelegate.m in Sources */,
 				8C7E001F1C10B17A0022856C /* MWProfileImageView.m in Sources */,
 				8C4197181C0CF7A600016BA0 /* MWTableViewCell.m in Sources */,
+				8CB564CE1C1B6E790021272B /* ProfileViewController.m in Sources */,
 				8C98CFA51C10ACEE00B43A26 /* AddQuestionViewController.m in Sources */,
 				8C80BB0F1C1A319200A5A8C5 /* MWKeyboardBarView.m in Sources */,
 				8C99EA0F1C1A078600E2B901 /* MWDetailTableViewCell.m in Sources */,

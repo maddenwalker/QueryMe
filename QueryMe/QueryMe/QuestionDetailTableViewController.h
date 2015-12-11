@@ -8,8 +8,9 @@
 
 #import <ParseUI/ParseUI.h>
 #import "MWKeyboardBarView.h"
+#import "MWDetailTableViewCell.h"
 
-@interface QuestionDetailTableViewController : PFQueryTableViewController <MWKeyboardBarViewDelegate>
+@interface QuestionDetailTableViewController : PFQueryTableViewController <MWKeyboardBarViewDelegate, MWDetailTableViewCellDelegate>
 
 @property (strong, nonatomic) PFObject *questionObject;
 

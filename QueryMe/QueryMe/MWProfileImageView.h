@@ -11,6 +11,8 @@
 
 @interface MWProfileImageView : PFImageView
 
+@property (strong, nonatomic) MWUser *user;
+
 - (void) setProfilePictureToUser:(MWUser *)user;
 
 @end

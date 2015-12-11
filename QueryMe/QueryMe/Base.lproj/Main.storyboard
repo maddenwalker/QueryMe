@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--All Questions-->
@@ -34,6 +35,7 @@
                         <outlet property="logoutButton" destination="TVA-mm-aeZ" id="qSR-2K-rl4"/>
                         <segue destination="fHS-Un-cwH" kind="presentation" identifier="addQuestionSegue" id="GmK-qS-KeD"/>
                         <segue destination="Vw3-Io-WJ8" kind="show" identifier="questionDetailSegue" id="KsF-mk-r35"/>
+                        <segue destination="fzy-5N-aOo" kind="presentation" identifier="profileViewSegue" id="0me-bL-6sw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdB-XX-5JT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -56,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3n7-2j-IUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2332" y="-122"/>
+            <point key="canvasLocation" x="2600" y="-128"/>
         </scene>
         <!--Question Detail Table View Controller-->
         <scene sceneID="4NY-4Z-Bw1">
@@ -72,10 +74,47 @@
                             <outlet property="delegate" destination="Vw3-Io-WJ8" id="LMY-LV-GOT"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="fzy-5N-aOo" kind="presentation" identifier="profileViewFromDetailSegue" id="pQT-bH-wae"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NxM-L6-PqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2332" y="596"/>
+            <point key="canvasLocation" x="2600" y="520"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="UWp-SI-hPv">
+            <objects>
+                <viewController id="fzy-5N-aOo" customClass="ProfileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R1P-4S-hLR"/>
+                        <viewControllerLayoutGuide type="bottom" id="3x3-wP-EHU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hAw-UJ-azq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F98-e7-3KA">
+                                <rect key="frame" x="20" y="20" width="30" height="44"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="34"/>
+                                <state key="normal" title="x">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="fzy-5N-aOo" eventType="touchUpInside" id="wHo-Lu-YhS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="F98-e7-3KA" firstAttribute="top" secondItem="R1P-4S-hLR" secondAttribute="bottom" id="JHZ-pB-etI"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="F98-e7-3KA" secondAttribute="leading" id="eoT-Cc-a3b"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QoS-Hb-300" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2600" y="1365"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="swK-w3-R77">
@@ -96,4 +135,7 @@
             <point key="canvasLocation" x="839" y="209"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="pQT-bH-wae"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -8,14 +8,13 @@
 
 #import "MWDetailTableViewCell.h"
 #import "MWUser.h"
-#import "MWProfileImageView.h"
 #import <Parse/Parse.h>
 
 @interface MWDetailTableViewCell()
 
-@property (strong, nonatomic) MWProfileImageView *profileImage;
 @property (strong, nonatomic) UILabel *answererName;
 @property (strong, nonatomic) UILabel *answerLabel;
+@property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 
 @end
 
@@ -29,7 +28,7 @@ static UIFont *boldSmallFont;
     
     if (self) {
         //Create all of the details in the cell
-        self.profileImage = [[MWProfileImageView alloc] init];
+        self.profilePicture = [[MWProfileImageView alloc] init];
         self.answererName = [[UILabel alloc] init];
         self.answerLabel = [[UILabel alloc] init];
         
@@ -40,17 +39,23 @@ static UIFont *boldSmallFont;
         self.answerLabel.font = lightFont;
         self.answerLabel.numberOfLines = 0;
         
+        //Add Gesture recognizer to ProfileImageView
+        self.profilePicture.userInteractionEnabled = YES;
+        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userProfilePictureTapped)];
+        self.tapGestureRecognizer.delegate = self;
+        [self.profilePicture addGestureRecognizer:self.tapGestureRecognizer];
+        
         //Add the labels to the view
         
-        NSArray *views = @[self.profileImage, self.answererName, self.answerLabel];
+        NSArray *views = @[self.profilePicture, self.answererName, self.answerLabel];
         for (UIView *view in views) {
             [self.contentView addSubview:view];
             view.translatesAutoresizingMaskIntoConstraints = NO;
         }
         
-        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_profileImage,_answererName, _answerLabel);
+        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_profilePicture,_answererName, _answerLabel);
         
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_profileImage(==50)]-[_answererName]"
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_profilePicture(==50)]-[_answererName]"
                                                                                  options:NSLayoutFormatAlignAllTop
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
@@ -65,15 +70,15 @@ static UIFont *boldSmallFont;
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
         
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_profileImage]"
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_profilePicture]"
                                                                                  options:kNilOptions
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
         
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_profileImage
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_profilePicture
                                                                      attribute:NSLayoutAttributeHeight
                                                                      relatedBy:NSLayoutRelationEqual
-                                                                        toItem:_profileImage
+                                                                        toItem:_profilePicture
                                                                      attribute:NSLayoutAttributeWidth
                                                                     multiplier:1 constant:0]];
         
@@ -94,13 +99,13 @@ static UIFont *boldSmallFont;
     [layoutCell configureCell:layoutCell withObject:object];
     [layoutCell layoutIfNeeded];
     
-    return (MAX(CGRectGetMaxY(layoutCell.answerLabel.frame), CGRectGetMaxY(layoutCell.profileImage.frame)) + 8 );
+    return (MAX(CGRectGetMaxY(layoutCell.answerLabel.frame), CGRectGetMaxY(layoutCell.profilePicture.frame)) + 8 );
     
 }
 
 - (void) configureCell:(MWDetailTableViewCell *)cell withObject:(PFObject *)object {
     //Setup the answer label
-    [self.profileImage setProfilePictureToUser:object[@"answerer"]];
+    [self.profilePicture setProfilePictureToUser:object[@"answerer"]];
     self.answerLabel.text = object[@"answerText"];
     
     //Setup user and label
@@ -115,6 +120,13 @@ static UIFont *boldSmallFont;
     }
     
     self.answererName.text = [NSString stringWithFormat:NSLocalizedString(@"%@ says", @"Declaring user saying something"), firstNameString];
+}
+
+//Tap Gesture Recognizer Methods
+- (void) userProfilePictureTapped {
+    if ([self.delegate respondsToSelector:@selector(userTappedProfilePictureInCell:)]) {
+        [self.delegate userTappedProfilePictureInCell:self];
+    }
 }
 
 

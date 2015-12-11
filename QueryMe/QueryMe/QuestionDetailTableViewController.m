@@ -9,8 +9,8 @@
 #import "QuestionDetailTableViewController.h"
 #import "MWUser.h"
 #import "MWDetailQuestionView.h"
-#import "MWDetailTableViewCell.h"
 #import "MWInputAccessoryView.h"
+#import "ProfileViewController.h"
 
 @interface QuestionDetailTableViewController ()
 
@@ -27,6 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.questionObject fetchIfNeededInBackground];
+    
     // Do any additional setup after loading the view.
     self.widthOfView = CGRectGetWidth(self.view.bounds);
     self.heightForQuestionView = [MWDetailQuestionView heightForViewWith:self.questionObject andWidth:self.widthOfView];
@@ -123,13 +126,13 @@
     [newAnswer saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (!error) {
             NSLog(@"Answer saved successfully");
-            NSMutableArray *arrayOfAnswers = [self.questionObject[@"answersToQuestion"] mutableCopy];
+            NSMutableArray *arrayOfAnswers = [self.questionObject objectForKey:@"answersToQuestion"];
             [arrayOfAnswers addObject:newAnswer];
             [self.questionObject addObject:arrayOfAnswers forKey:@"answersToQuestion"];
+            [self loadObjects];
             [self.questionObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (!error) {
                     NSLog(@"Question updated correctly with associated answer");
-                    [self loadObjects];
                 }
             }];
          }
@@ -160,11 +163,17 @@
     
     if (cell == nil) {
         cell = [[MWDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:customIdentifier];
+        cell.delegate = self;
     }
     
     [cell configureCell:cell withObject:object];
     
     return cell;
+}
+
+//MARK: TableViewCell Delegate Methods
+- (void)userTappedProfilePictureInCell:(MWDetailTableViewCell *)cell {
+    [self performSegueWithIdentifier:@"profileViewFromDetailSegue" sender:cell];
 }
 
 //MARK: MWKeyboardBarViewDelegate
@@ -175,6 +184,16 @@
         [self submitTextToParse:text];
     } else {
         NSLog(@"No text");
+    }
+}
+
+//MARK: Prepare for segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"profileViewFromDetailSegue"]) {
+        ProfileViewController *profileVC = [segue destinationViewController];
+        MWDetailTableViewCell *cell = (MWDetailTableViewCell *)sender;
+        profileVC.profileImageView = cell.profilePicture;
     }
 }
 

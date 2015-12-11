@@ -8,7 +8,11 @@
 
 #import "MWProfileImageView.h"
 
-@implementation MWProfileImageView
+@interface MWProfileImageView()
+
+@end
+
+@implementation MWProfileImageView 
 
 - (instancetype)init
 {
@@ -23,6 +27,8 @@
 }
 
 - (void) setProfilePictureToUser:(MWUser *)user {
+    
+    self.user = user;
     
     if ([user[@"profilePictureExists"] boolValue]) {
         PFFile *profilePicture = user[@"profilePicture"];
