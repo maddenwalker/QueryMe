@@ -10,10 +10,14 @@
 #import "MWUser.h"
 #import "MWDetailQuestionView.h"
 #import "MWDetailTableViewCell.h"
+#import "MWInputAccessoryView.h"
 
 @interface QuestionDetailTableViewController ()
 
 @property (strong, nonatomic) MWDetailQuestionView *questionView;
+@property (strong, nonatomic) MWInputAccessoryView *inputView;
+@property (assign, nonatomic) CGFloat widthOfView;
+@property (assign, nonatomic) CGFloat heightForQuestionView;
 
 @end
 
@@ -22,14 +26,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.widthOfView = CGRectGetWidth(self.view.bounds);
+    self.heightForQuestionView = [MWDetailQuestionView heightForViewWith:self.questionObject andWidth:self.widthOfView];
+    
+    //Setup the questionView above the table and sticky to the top
     self.questionView = [[MWDetailQuestionView alloc] init];
-    self.questionView.layer.zPosition++;
     [self.questionView configureViewwithObject:self.questionObject];
-    self.questionView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), CGRectGetWidth(self.view.bounds), 100);
-    [self.navigationController.view addSubview:self.questionView];
+    NSLog(@"%f", self.heightForQuestionView);
+    self.questionView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame) - 8, self.widthOfView, self.heightForQuestionView);
+    [self.navigationController.view insertSubview:self.questionView belowSubview:self.navigationController.navigationBar];
     
     self.tableView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(self.questionView.frame), 0, 0, 0);
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(CGRectGetHeight(self.questionView.frame), 0, 0, 0);
+    
+    //Add the inputAccessoryView docked to the bottom so people can answer
+    self.inputView = [[MWInputAccessoryView alloc] init];
+    self.inputView.backgroundColor = [UIColor whiteColor];
+    self.inputView.keyboardDelegate = self;
+    [self.inputView becomeFirstResponder];
+    [self.view addSubview:self.inputView];
     
 }
 
@@ -58,6 +73,9 @@
     [self.questionView removeFromSuperview];
 }
 
+- (UIView *)inputAccessoryView {
+    return self.inputView;
+}
 
 - (PFQuery *)baseQuery {
     PFQuery *answerQuery = [PFQuery queryWithClassName:self.parseClassName];
@@ -71,6 +89,29 @@
 
 - (PFQuery *)queryForTable {
     return [self baseQuery];
+}
+
+- (void) submitTextToParse:(NSString *)text {
+    
+    PFObject *newAnswer = [[PFObject alloc] initWithClassName:@"Answers"];
+    newAnswer[@"answerText"] = text;
+    newAnswer[@"answerer"] = [MWUser currentUser];
+    newAnswer[@"questionAnswered"] = self.questionObject;
+    [newAnswer saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"Answer saved successfully");
+            NSMutableArray *arrayOfAnswers = [self.questionObject[@"answersToQuestion"] mutableCopy];
+            [arrayOfAnswers addObject:newAnswer];
+            [self.questionObject addObject:arrayOfAnswers forKey:@"answersToQuestion"];
+            [self.questionObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (!error) {
+                    NSLog(@"Question updated correctly with associated answer");
+                    [self loadObjects];
+                }
+            }];
+         }
+    }];
+    
 }
 
 
@@ -103,5 +144,15 @@
     return cell;
 }
 
+//MARK: MWKeyboardBarViewDelegate
+
+- (void)keyboardBar:(MWKeyboardBarView *)keyboardBar sendText:(NSString *)text {
+    
+    if (text) {
+        [self submitTextToParse:text];
+    } else {
+        NSLog(@"No text");
+    }
+}
 
 @end

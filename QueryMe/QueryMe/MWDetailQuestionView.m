@@ -25,8 +25,9 @@ static UIFont *mediumFont;
     self = [super init];
     
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        
+        self.backgroundColor = [UIColor colorWithRed:56.0 / 255.0 green:165.0 / 255.0 blue:219.0 / 255.0 alpha:1.0];
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = 8;
         
         //Setup the labels
         self.questionText = [[UILabel alloc] init];
@@ -34,10 +35,12 @@ static UIFont *mediumFont;
         
         //Setup questionText
         self.questionText.font = mediumFont;
+        self.questionText.textColor = [UIColor whiteColor];
         self.questionText.numberOfLines = 0;
         
         //Setup askerLabel
         self.askerLabel.font = lightFontWithItalics;
+        self.askerLabel.textColor = [UIColor whiteColor];
         
         for (UIView *view in @[self.askerLabel, self.questionText]) {
             [self addSubview:view];
@@ -75,6 +78,15 @@ static UIFont *mediumFont;
     mediumFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
 }
 
+//TODO: Figure out why I cannot return a fully formed view with the right dimensions
++ (CGFloat) heightForViewWith:(PFObject *)object andWidth:(CGFloat)width {
+    MWDetailQuestionView *layoutView = [[MWDetailQuestionView alloc] init];
+    [layoutView configureViewwithObject:object];
+    [layoutView setNeedsLayout];
+    [layoutView layoutIfNeeded];
+    
+    return CGRectGetMaxY(layoutView.questionText.frame);
+}
 
 - (void) configureViewwithObject:(PFObject *)object {
     //Setup user and label

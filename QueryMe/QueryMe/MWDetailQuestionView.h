@@ -12,5 +12,6 @@
 @interface MWDetailQuestionView : UIView
 
 - (void) configureViewwithObject:(PFObject *)object;
++ (CGFloat) heightForViewWith:(PFObject *)object andWidth:(CGFloat)width; 
 
 @end
