@@ -49,22 +49,19 @@ static UIFont *mediumFont;
         
         NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_askerLabel, _questionText);
         
-        NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_askerLabel]"
-                                                                                            options:kNilOptions
-                                                                                            metrics:nil
-                                                                                              views:viewDictionary];
+
         
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_askerLabel]-[_questionText]"
+        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[_askerLabel]-[_questionText]"
                                                                                           options:NSLayoutFormatAlignAllLeft
                                                                                           metrics:nil
                                                                                             views:viewDictionary];
         
-        NSArray *widthConstraintForQuestion = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_questionText]-20-|"
+        NSArray *widthConstraintForQuestion = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_questionText]-20-|"
                                                                                                  options:kNilOptions
                                                                                                  metrics:nil
                                                                                                    views:viewDictionary];
         
-        for (NSArray *constraints in @[horizontalConstraints, verticalConstraints, widthConstraintForQuestion]) {
+        for (NSArray *constraints in @[verticalConstraints, widthConstraintForQuestion]) {
             [self addConstraints:constraints];
         }
         
@@ -78,14 +75,13 @@ static UIFont *mediumFont;
     mediumFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
 }
 
-//TODO: Figure out why I cannot return a fully formed view with the right dimensions
 + (CGFloat) heightForViewWith:(PFObject *)object andWidth:(CGFloat)width {
     MWDetailQuestionView *layoutView = [[MWDetailQuestionView alloc] init];
     [layoutView configureViewwithObject:object];
-    [layoutView setNeedsLayout];
+    layoutView.frame = CGRectMake(0, 0, width, 50);
     [layoutView layoutIfNeeded];
     
-    return CGRectGetMaxY(layoutView.questionText.frame);
+    return CGRectGetMaxY(layoutView.questionText.frame) + 20;
 }
 
 - (void) configureViewwithObject:(PFObject *)object {

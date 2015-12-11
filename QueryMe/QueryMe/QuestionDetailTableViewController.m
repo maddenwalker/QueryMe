@@ -18,6 +18,8 @@
 @property (strong, nonatomic) MWInputAccessoryView *inputView;
 @property (assign, nonatomic) CGFloat widthOfView;
 @property (assign, nonatomic) CGFloat heightForQuestionView;
+@property (assign, nonatomic) CGFloat startingYCoordinateForQuestion;
+@property (assign, nonatomic) CGFloat endingYCoordinateForQuestion;
 
 @end
 
@@ -28,12 +30,14 @@
     // Do any additional setup after loading the view.
     self.widthOfView = CGRectGetWidth(self.view.bounds);
     self.heightForQuestionView = [MWDetailQuestionView heightForViewWith:self.questionObject andWidth:self.widthOfView];
+    self.startingYCoordinateForQuestion = -CGRectGetMaxY(self.navigationController.navigationBar.frame) - 8;
+    self.endingYCoordinateForQuestion = CGRectGetMaxY(self.navigationController.navigationBar.frame) - 8;
     
     //Setup the questionView above the table and sticky to the top
     self.questionView = [[MWDetailQuestionView alloc] init];
+    [self.questionView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     [self.questionView configureViewwithObject:self.questionObject];
-    NSLog(@"%f", self.heightForQuestionView);
-    self.questionView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame) - 8, self.widthOfView, self.heightForQuestionView);
+    self.questionView.frame = CGRectMake(0, self.startingYCoordinateForQuestion, self.widthOfView, self.heightForQuestionView);
     [self.navigationController.view insertSubview:self.questionView belowSubview:self.navigationController.navigationBar];
     
     self.tableView.contentInset = UIEdgeInsetsMake(CGRectGetHeight(self.questionView.frame), 0, 0, 0);
@@ -46,6 +50,25 @@
     [self.inputView becomeFirstResponder];
     [self.view addSubview:self.inputView];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    CGRect endFrameForQuestionView = self.questionView.frame;
+    endFrameForQuestionView.origin.y = self.endingYCoordinateForQuestion;
+    
+    [UIView beginAnimations:nil context:nil];
+    
+    [UIView animateWithDuration:0.7
+                          delay:0
+         usingSpringWithDamping:0.7
+          initialSpringVelocity:0
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.questionView.frame = endFrameForQuestionView;
+    }
+                     completion:nil];
+    
+    [UIView commitAnimations];
 }
 
 - (void)didReceiveMemoryWarning {
