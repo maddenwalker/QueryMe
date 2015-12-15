@@ -11,6 +11,7 @@
 #import "MWDetailQuestionView.h"
 #import "MWInputAccessoryView.h"
 #import "ProfileViewController.h"
+#import "MainQuestionTableViewController.h"
 
 @interface QuestionDetailTableViewController ()
 
@@ -96,8 +97,12 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.questionView removeFromSuperview];
+    UIViewController *topVC = self.navigationController.topViewController;
+    if ([MainQuestionTableViewController class] == [topVC class]) {
+        [self.questionView removeFromSuperview];
+    }
 }
+
 
 - (UIView *)inputAccessoryView {
     return self.inputView;
