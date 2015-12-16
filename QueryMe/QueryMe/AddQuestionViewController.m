@@ -206,7 +206,8 @@ static int characterLimit = 200;
     PFObject *newQuestion = [[PFObject alloc] initWithClassName:@"Question"];
     newQuestion[@"questionText"] = self.questionTextField.text;
     newQuestion[@"asker"] = [PFObject objectWithoutDataWithClassName:@"_User" objectId:self.currentUser.objectId];
-    //saving the object directly and blocking main thread on purpose here because I want the user to see their question when they go to the main view controller, obviously an issue when network connectivity lost.
+    newQuestion[@"answersToQuestion"] = @[];
+
     [newQuestion saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (!error) {
             NSLog(@"Data saved successfully to parse");

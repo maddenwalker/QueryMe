@@ -7,7 +7,8 @@
 //
 
 #import <ParseUI/ParseUI.h>
+#import "MWTableViewCell.h"
 
-@interface MainQuestionTableViewController : PFQueryTableViewController
+@interface MainQuestionTableViewController : PFQueryTableViewController <MWTableViewCellDelegate>
 
 @end

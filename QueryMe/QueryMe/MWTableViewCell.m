@@ -8,16 +8,15 @@
 
 #import "MWTableViewCell.h"
 #import "MWUser.h"
-#import "MWProfileImageView.h"
 #import <Parse/Parse.h>
 
 @interface MWTableViewCell()
 
-@property (strong, nonatomic) MWProfileImageView *profilePicture;
 @property (strong, nonatomic) UILabel *answerCountText;
 @property (strong, nonatomic) UILabel *questionInterestIndicator;
 @property (strong, nonatomic) UILabel *freshLabelIndicator;
 @property (strong, nonatomic) NSLayoutConstraint *profilePictureAspectRatioConstraint;
+@property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 
 @end
 
@@ -32,6 +31,7 @@ static UIColor *newLabelColor;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
+        
         //Instantiate all of the cell elements
         self.profilePicture = [[MWProfileImageView alloc] init];
         self.answerCountText = [[UILabel alloc] init];
@@ -58,6 +58,12 @@ static UIColor *newLabelColor;
         self.freshLabelIndicator.font = lightFont;
         self.freshLabelIndicator.backgroundColor = newLabelColor;
         self.freshLabelIndicator.textColor = [UIColor whiteColor];
+        
+        //Add Gesture recognizer to ProfileImageView
+        self.profilePicture.userInteractionEnabled = YES;
+        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userProfilePictureTapped)];
+        self.tapGestureRecognizer.delegate = self;
+        [self.profilePicture addGestureRecognizer:self.tapGestureRecognizer];
         
         //Add labels to view
         for (UIView *view in @[self.questionText, self.profilePicture, self.freshLabelIndicator, self.answerCountText, self.questionInterestIndicator]) {
@@ -114,6 +120,10 @@ static UIColor *newLabelColor;
     
  }
 
+- (void) setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:NO];
+}
+
 - (void) configureCell:(MWTableViewCell *)cell withObject:(PFObject *)object {
     //Setup the question label
     
@@ -164,6 +174,16 @@ static UIColor *newLabelColor;
     }
     
 }
+
+
+//Tap Gesture Recognizer Methods
+- (void) userProfilePictureTapped {
+    if ([self.delegate respondsToSelector:@selector(userTappedProfilePictureInCell:)]) {
+        [self.delegate userTappedProfilePictureInCell:self];
+    }
+}
+
+//MARK: Helper Methods
 
 - (void) addFreshLabelToQuestion {
     self.freshLabelIndicator.text = NSLocalizedString(@" NEW ", @"New label for questions");

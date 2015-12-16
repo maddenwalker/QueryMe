@@ -8,11 +8,11 @@
 
 #import "MainQuestionTableViewController.h"
 #import "MWUser.h"
-#import "MWTableViewCell.h"
 #import "MWLoginViewController.h"
 #import "MWSignUpViewController.h"
 #import "AddQuestionViewController.h"
-#import "QuestionDetailViewController.h"
+#import "QuestionDetailTableViewController.h"
+#import "ProfileViewController.h"
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -83,25 +83,26 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
 - (IBAction)composeButtonPressed:(UIBarButtonItem *)sender {
     
     if (self.userLoggedIn) {
-        
         [self performSegueWithIdentifier:@"addQuestionSegue" sender:nil];
-        
     } else {
-     
-        //login view controller
-        MWLoginViewController *loginViewController = [[MWLoginViewController alloc] init];
-        [loginViewController setDelegate:self];
-        [loginViewController setFacebookPermissions:[NSArray arrayWithObjects:@"friends_about_me", nil]];
-        [loginViewController setFields:PFLogInFieldsDefault | PFLogInFieldsFacebook ];
-        
-        //sign up view controller
-        MWSignUpViewController *signUpViewController = [[MWSignUpViewController alloc] init];
-        [signUpViewController setDelegate:self];
-        [loginViewController setSignUpController:signUpViewController];
-        [self presentViewController:loginViewController animated:YES completion:NULL];
-        
+        [self performLoginOptions];
     }
     
+}
+
+- (void) performLoginOptions {
+
+    //login view controller
+    MWLoginViewController *loginViewController = [[MWLoginViewController alloc] init];
+    [loginViewController setDelegate:self];
+    [loginViewController setFacebookPermissions:[NSArray arrayWithObjects:@"friends_about_me", nil]];
+    [loginViewController setFields:PFLogInFieldsDefault | PFLogInFieldsFacebook ];
+    
+    //sign up view controller
+    MWSignUpViewController *signUpViewController = [[MWSignUpViewController alloc] init];
+    [signUpViewController setDelegate:self];
+    [loginViewController setSignUpController:signUpViewController];
+    [self presentViewController:loginViewController animated:YES completion:NULL];
 }
 
 //MARK: MWLoginViewControllerDelegate Methods
@@ -235,6 +236,7 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     
     if (cell == nil) {
         cell = [[MWTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:customCellIdentifier];
+        cell.delegate = self;
     }
     
     [cell configureCell:cell withObject:object];
@@ -242,17 +244,36 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.userLoggedIn) {
+        [self performSegueWithIdentifier:@"questionDetailSegue" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+    } else {
+        [self performLoginOptions];
+    }
+    
+}
+
+//MARK: TableViewCell Delegate Methods
+- (void)userTappedProfilePictureInCell:(MWTableViewCell *)cell {
+    [self performSegueWithIdentifier:@"profileViewSegue" sender:cell];
+}
+
 //MARK: Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"questionDetailSegue"]) {
-        QuestionDetailViewController *detailVC = [segue destinationViewController];
+        QuestionDetailTableViewController *detailVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        detailVC.questionText = ((MWTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).questionText.text;
+        detailVC.questionObject = [self.objects objectAtIndex:indexPath.row];
     } else if ([[segue identifier] isEqualToString:@"addQuestionSegue"]) {
         AddQuestionViewController *addVC = [segue destinationViewController];
         addVC.delegate = self;
+    } else if ([[segue identifier] isEqualToString:@"profileViewSegue"]) {
+        ProfileViewController *profileVC = [segue destinationViewController];
+        MWTableViewCell *cell = (MWTableViewCell *)sender;
+        profileVC.user = cell.profilePicture.user;
     }
 }
 
