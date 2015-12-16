@@ -7,13 +7,15 @@
 //
 
 #import "ProfileViewController.h"
+#import "MWProfileImageView.h"
 
 @interface ProfileViewController ()
 - (IBAction)closeButtonTapped:(id)sender;
 
-@property (strong, nonatomic) MWUser *user;
+//@property (strong, nonatomic) MWUser *user;
 @property (strong, nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UILabel *profileDescriptionLabel;
+@property (strong, nonatomic) MWProfileImageView *profileImageView;
 
 @end
 
@@ -22,10 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.profileImageView = [[MWProfileImageView alloc] init];
     self.profileImageView.layer.cornerRadius = 50;
     
     //Setup the user that is in the profile view
-    self.user = self.profileImageView.user;
+    [self.profileImageView setProfilePictureToUser:self.user];
     
     //Setup the profile description label
     self.profileDescriptionLabel = [[UILabel alloc] init];

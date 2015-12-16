@@ -7,12 +7,11 @@
 //
 
 #import "MWUser.h"
-#import "MWProfileImageView.h"
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
 @interface ProfileViewController : UIViewController
 
-@property (strong, nonatomic) MWProfileImageView *profileImageView;
+@property (strong, nonatomic) MWUser *user;
 
 @end

@@ -71,7 +71,7 @@
         self.questionView.frame = endFrameForQuestionView;
     }
                      completion:nil];
-    
+        
     [UIView commitAnimations];
 }
 
@@ -198,7 +198,7 @@
     if ([[segue identifier] isEqualToString:@"profileViewFromDetailSegue"]) {
         ProfileViewController *profileVC = [segue destinationViewController];
         MWDetailTableViewCell *cell = (MWDetailTableViewCell *)sender;
-        profileVC.profileImageView = cell.profilePicture;
+        profileVC.user = cell.profilePicture.user;
     }
 }
 

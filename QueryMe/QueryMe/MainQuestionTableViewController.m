@@ -273,7 +273,7 @@ static NSString * const customCellIdentifier = @"CustomQuestionCell";
     } else if ([[segue identifier] isEqualToString:@"profileViewSegue"]) {
         ProfileViewController *profileVC = [segue destinationViewController];
         MWTableViewCell *cell = (MWTableViewCell *)sender;
-        profileVC.profileImageView = cell.profilePicture;
+        profileVC.user = cell.profilePicture.user;
     }
 }
 
